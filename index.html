@@ -234,10 +234,34 @@ footer a:hover{opacity:.7}
 @media(max-width:900px){.three-phases{grid-template-columns:1fr;max-width:480px;gap:35px}.what-grid{grid-template-columns:1fr;gap:12px}}
 @media(max-width:600px){.hekai-meaning{gap:18px}}
 
+/* ===== LANGUAGE SWITCHER ===== */
+.lang-wrap{position:fixed;top:18px;right:22px;z-index:10000;opacity:.45;transition:opacity .4s}
+.lang-wrap:hover{opacity:.85}
+.lang-select{appearance:none;-webkit-appearance:none;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);font-family:'Didact Gothic',sans-serif;font-size:.72rem;letter-spacing:.06em;padding:6px 26px 6px 10px;border-radius:3px;cursor:pointer;outline:none;transition:all .3s;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.lang-select:hover,.lang-select:focus{border-color:rgba(255,102,0,.2);color:rgba(255,255,255,.7)}
+.lang-select option{background:#1a1a1a;color:#ccc}
+.lang-arrow{position:absolute;right:8px;top:50%;transform:translateY(-50%);pointer-events:none;font-size:.5rem;color:rgba(255,255,255,.3)}
+
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.35}
 </style>
 </head>
 <body>
+
+<!-- Language switcher -->
+<div class="lang-wrap">
+  <select class="lang-select" id="langSelect" onchange="setLang(this.value)">
+    <option value="cs">Čeština</option>
+    <option value="de">Deutsch</option>
+    <option value="en" selected>English</option>
+    <option value="es">Español</option>
+    <option value="fr">Français</option>
+    <option value="pl">Polski</option>
+    <option value="pt">Português</option>
+    <option value="sk">Slovenčina</option>
+    <option value="uk">Українська</option>
+  </select>
+  <span class="lang-arrow">&#9662;</span>
+</div>
 
 <!-- ===== HERO ===== -->
 <section class="hero">
@@ -247,13 +271,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="eclipse-sun"></div><div class="eclipse-moon"></div><div class="diamond-flare"></div>
   </div>
   <h1 class="hero-title">Eclipsion</h1>
-  <p class="hero-motto">For a better humanity</p>
-  <a href="#intro" class="hero-scroll"><span>Discover</span><div class="scroll-line"></div></a>
+  <p class="hero-motto" data-i18n="hero_motto">For a better humanity</p>
+  <a href="#intro" class="hero-scroll"><span data-i18n="discover">Discover</span><div class="scroll-line"></div></a>
 </section>
 
 <!-- ===== INTRO ===== -->
 <section class="section-dark bg-warm" id="intro">
-  <p class="intro-text reveal">
+  <p class="intro-text reveal" data-i18n-html="intro_text">
     Life is full of big changes — relocating to a new country, starting a business,
     navigating taxes in a new system, getting married, taking out a loan.<br><br>
     <em>Eclipsion helps you understand what you're getting into.</em><br><br>
@@ -267,46 +291,46 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
 <!-- ===== WHAT WE DO ===== -->
 <section class="section-dark bg-warm2">
-  <h2 class="what-headline reveal">When life changes, you deserve <em>clarity</em> — not guesswork</h2>
+  <h2 class="what-headline reveal" data-i18n-html="what_headline">When life changes, you deserve <em>clarity</em> — not guesswork</h2>
   <div class="what-grid">
-    <div class="what-item reveal"><div class="what-icon">&#9670;</div><p class="what-item-title">Precise Calculations</p><p class="what-item-desc">Finances, cost of living, tax implications, loan comparisons — real numbers, not estimates. Data you can make decisions with.</p></div>
-    <div class="what-item reveal"><div class="what-icon">&#9671;</div><p class="what-item-title">Clear Trade-Offs</p><p class="what-item-desc">Every big decision has pros and cons. We lay them out honestly so you see the full picture before you commit.</p></div>
-    <div class="what-item reveal"><div class="what-icon">&#9672;</div><p class="what-item-title">Right Connections</p><p class="what-item-desc">When you need a lawyer, tax advisor, or specialist — we connect you with trusted professionals. No middlemen, no confusion.</p></div>
+    <div class="what-item reveal"><div class="what-icon">&#9670;</div><p class="what-item-title" data-i18n="calc_title">Precise Calculations</p><p class="what-item-desc" data-i18n="calc_desc">Finances, cost of living, tax implications, loan comparisons — real numbers, not estimates. Data you can make decisions with.</p></div>
+    <div class="what-item reveal"><div class="what-icon">&#9671;</div><p class="what-item-title" data-i18n="trade_title">Clear Trade-Offs</p><p class="what-item-desc" data-i18n="trade_desc">Every big decision has pros and cons. We lay them out honestly so you see the full picture before you commit.</p></div>
+    <div class="what-item reveal"><div class="what-icon">&#9672;</div><p class="what-item-title" data-i18n="conn_title">Right Connections</p><p class="what-item-desc" data-i18n="conn_desc">When you need a lawyer, tax advisor, or specialist — we connect you with trusted professionals. No middlemen, no confusion.</p></div>
   </div>
   <div class="what-tags reveal" style="margin-top:45px">
-    <span class="what-tag">Relocating abroad</span><span class="what-tag">Tax planning</span><span class="what-tag">Freelancer setup</span><span class="what-tag">Loans & mortgages</span><span class="what-tag">Getting married</span><span class="what-tag">Cost of living analysis</span><span class="what-tag">Visa & residency</span><span class="what-tag">Starting a business</span>
+    <span class="what-tag" data-i18n="tag_reloc">Relocating abroad</span><span class="what-tag" data-i18n="tag_tax">Tax planning</span><span class="what-tag" data-i18n="tag_free">Freelancer setup</span><span class="what-tag" data-i18n="tag_loan">Loans & mortgages</span><span class="what-tag" data-i18n="tag_marry">Getting married</span><span class="what-tag" data-i18n="tag_cost">Cost of living analysis</span><span class="what-tag" data-i18n="tag_visa">Visa & residency</span><span class="what-tag" data-i18n="tag_biz">Starting a business</span>
   </div>
-  <p class="what-bridge reveal">We structured our approach around the most powerful transformation in nature — <em>the eclipse</em>. Three phases. From preparation to crossing to life-long support.</p>
+  <p class="what-bridge reveal" data-i18n-html="what_bridge">We structured our approach around the most powerful transformation in nature — <em>the eclipse</em>. Three phases. From preparation to crossing to life-long support.</p>
   <div class="divider reveal"></div>
 </section>
 
 <!-- ===== THREE PHASES ===== -->
 <section class="section-dark bg-warm2" style="padding-top:60px">
   <div class="phases-header">
-    <p class="small-label reveal">Our Framework</p>
-    <h2 class="phases-title reveal">The Three Phases</h2>
+    <p class="small-label reveal" data-i18n="framework_label">Our Framework</p>
+    <h2 class="phases-title reveal" data-i18n="phases_title">The Three Phases</h2>
   </div>
   <div class="three-phases">
     <div class="phase-card reveal">
       <div class="phase-card-eclipse"><div class="mini-eclipse eclipse-before"><div class="mini-sun"></div><div class="mini-moon"></div></div></div>
-      <p class="phase-card-number">Phase I</p>
-      <h3 class="phase-card-name">Before the Eclipse</h3>
-      <p class="phase-card-subtitle">Discovery & Preparation</p>
-      <p class="phase-card-desc">We begin where most don't — <strong>before the journey starts</strong>. Listening. Understanding who you are, what you carry, where you need to go. Mapping pathways with precision, assessing risk, calculating what lies ahead.</p>
+      <p class="phase-card-number" data-i18n="phase1_num">Phase I</p>
+      <h3 class="phase-card-name" data-i18n="phase1_name">Before the Eclipse</h3>
+      <p class="phase-card-subtitle" data-i18n="phase1_sub">Discovery & Preparation</p>
+      <p class="phase-card-desc" data-i18n-html="phase1_desc">We begin where most don't — <strong>before the journey starts</strong>. Listening. Understanding who you are, what you carry, where you need to go. Mapping pathways with precision, assessing risk, calculating what lies ahead.</p>
     </div>
     <div class="phase-card center-phase reveal">
       <div class="phase-card-eclipse"><div class="mini-eclipse eclipse-during"><div class="mini-corona"></div><div class="mini-sun"></div><div class="mini-moon"></div></div></div>
-      <p class="phase-card-number">Phase II</p>
-      <h3 class="phase-card-name">The Eclipse</h3>
-      <p class="phase-card-subtitle">The Great Crossing</p>
-      <p class="phase-card-desc">The transformation itself — <strong>when everything changes</strong>. We are present through every stage of the crossing, from the first step to the moment you arrive on the other side.</p>
+      <p class="phase-card-number" data-i18n="phase2_num">Phase II</p>
+      <h3 class="phase-card-name" data-i18n="phase2_name">The Eclipse</h3>
+      <p class="phase-card-subtitle" data-i18n="phase2_sub">The Great Crossing</p>
+      <p class="phase-card-desc" data-i18n-html="phase2_desc">The transformation itself — <strong>when everything changes</strong>. We are present through every stage of the crossing, from the first step to the moment you arrive on the other side.</p>
     </div>
     <div class="phase-card reveal">
       <div class="phase-card-eclipse"><div class="mini-eclipse eclipse-after"><div class="mini-sun"></div><div class="mini-moon"></div></div></div>
-      <p class="phase-card-number">Phase III</p>
-      <h3 class="phase-card-name">After the Eclipse</h3>
-      <p class="phase-card-subtitle">Life-Long Continuity</p>
-      <p class="phase-card-desc">Where others stop, <strong>we continue</strong>. Integration, growth, community, and a relationship that evolves with you. After the last contact, there is no goodbye — only a new chapter.</p>
+      <p class="phase-card-number" data-i18n="phase3_num">Phase III</p>
+      <h3 class="phase-card-name" data-i18n="phase3_name">After the Eclipse</h3>
+      <p class="phase-card-subtitle" data-i18n="phase3_sub">Life-Long Continuity</p>
+      <p class="phase-card-desc" data-i18n-html="phase3_desc">Where others stop, <strong>we continue</strong>. Integration, growth, community, and a relationship that evolves with you. After the last contact, there is no goodbye — only a new chapter.</p>
     </div>
   </div>
 </section>
@@ -314,7 +338,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 <!-- ===== TRANSITION TO HEKAI ===== -->
 <section class="transition-section">
   <div class="transition-glow"></div>
-  <p class="transition-text reveal">
+  <p class="transition-text reveal" data-i18n-html="transition_text">
     Our first tool brings <em>Phase I</em> to life.<br><br>
     A companion that helps you see which countries match your life —<br>
     with precise data, honest trade-offs, and a ranking that evolves<br>
@@ -323,11 +347,11 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
   <div class="hekai-reveal reveal">
     <p class="hekai-formal">Hek<em>ai</em>rōs</p>
     <h2 class="hekai-name">Hek<em>ai</em></h2>
-    <p class="hekai-tagline">Find where your life works best</p>
+    <p class="hekai-tagline" data-i18n="hekai_tagline">Find where your life works best</p>
     <div class="hekai-meaning">
-      <div class="hekai-meaning-item"><p class="hekai-meaning-label">Roots</p><p class="hekai-meaning-value"><span class="greek">ἑκατός</span> + <span class="greek">καιρός</span></p></div>
-      <div class="hekai-meaning-item"><p class="hekai-meaning-label">Meaning</p><p class="hekai-meaning-value">The far-reaching moment</p></div>
-      <div class="hekai-meaning-item"><p class="hekai-meaning-label">Assistant</p><p class="hekai-meaning-value">K<em>ai</em></p></div>
+      <div class="hekai-meaning-item"><p class="hekai-meaning-label" data-i18n="roots">Roots</p><p class="hekai-meaning-value"><span class="greek">ἑκατός</span> + <span class="greek">καιρός</span></p></div>
+      <div class="hekai-meaning-item"><p class="hekai-meaning-label" data-i18n="meaning">Meaning</p><p class="hekai-meaning-value" data-i18n="far_reaching">The far-reaching moment</p></div>
+      <div class="hekai-meaning-item"><p class="hekai-meaning-label" data-i18n="assistant">Assistant</p><p class="hekai-meaning-value">K<em>ai</em></p></div>
     </div>
   </div>
 </section>
@@ -335,12 +359,12 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 <!-- ===== HEKAI TOOL ===== -->
 <section class="hekai-section">
   <div class="hekai-section-header">
-    <p class="hekai-section-title reveal">Hek<em>ai</em> in action</p>
+    <p class="hekai-section-title reveal" data-i18n-html="hekai_action">Hek<em>ai</em> in action</p>
   </div>
   <div class="theme-switch-wrap reveal">
-    <span class="theme-label active-label" id="lbl-light">Light</span>
+    <span class="theme-label active-label" id="lbl-light" data-i18n="theme_light">Light</span>
     <div class="theme-switch" id="themeSwitch" onclick="toggleTheme()"><div class="sw-dot"></div></div>
-    <span class="theme-label" id="lbl-dark">Dark</span>
+    <span class="theme-label" id="lbl-dark" data-i18n="theme_dark">Dark</span>
   </div>
   <div class="hekai-mock-wrap reveal">
     <div class="hekai-tool" data-theme="light" id="hekaiTool">
@@ -348,26 +372,26 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div>
           <div class="ht-eclipsion">Eclipsion</div>
           <div class="ht-name">Hek<em>ai</em></div>
-          <div class="ht-tagline">Find where your life works best</div>
+          <div class="ht-tagline" data-i18n="hekai_tagline">Find where your life works best</div>
         </div>
       </div>
       <div class="ht-sep"></div>
-      <p class="ht-question">How do you earn your income?</p>
+      <p class="ht-question" data-i18n="ht_question">How do you earn your income?</p>
       <div class="ht-toggle-bar">
-        <div class="ht-toggle-opt active" onclick="setToggle(this)">Employment</div>
-        <div class="ht-toggle-opt" onclick="setToggle(this)">Freelancing</div>
+        <div class="ht-toggle-opt active" onclick="setToggle(this)" data-i18n="ht_employment">Employment</div>
+        <div class="ht-toggle-opt" onclick="setToggle(this)" data-i18n="ht_freelancing">Freelancing</div>
       </div>
-      <p class="ht-label">Best matches for you</p>
+      <p class="ht-label" data-i18n="ht_best_matches">Best matches for you</p>
       <ul class="ht-countries">
-        <li class="ht-country top"><span class="ht-rank">1</span><span class="ht-flag">&#127477;&#127481;</span><div class="ht-info"><div class="ht-cname">Portugal</div><div class="ht-cdetail">Strong match across 8 pillars</div></div><div class="ht-score-wrap"><span class="ht-score">92</span><div class="ht-bar-bg"><div class="ht-bar" style="width:92%"></div></div></div></li>
-        <li class="ht-country"><span class="ht-rank">2</span><span class="ht-flag">&#127466;&#127480;</span><div class="ht-info"><div class="ht-cname">Spain</div><div class="ht-cdetail">High on work-life balance</div></div><div class="ht-score-wrap"><span class="ht-score">87</span><div class="ht-bar-bg"><div class="ht-bar" style="width:87%"></div></div></div></li>
-        <li class="ht-country"><span class="ht-rank">3</span><span class="ht-flag">&#127464;&#127487;</span><div class="ht-info"><div class="ht-cname">Czech Republic</div><div class="ht-cdetail">Excellent cost-to-income ratio</div></div><div class="ht-score-wrap"><span class="ht-score">84</span><div class="ht-bar-bg"><div class="ht-bar" style="width:84%"></div></div></div></li>
-        <li class="ht-country"><span class="ht-rank">4</span><span class="ht-flag">&#127465;&#127466;</span><div class="ht-info"><div class="ht-cname">Germany</div><div class="ht-cdetail">Top healthcare & safety</div></div><div class="ht-score-wrap"><span class="ht-score">81</span><div class="ht-bar-bg"><div class="ht-bar" style="width:81%"></div></div></div></li>
-        <li class="ht-country"><span class="ht-rank">5</span><span class="ht-flag">&#127475;&#127473;</span><div class="ht-info"><div class="ht-cname">Netherlands</div><div class="ht-cdetail">Strong community & jobs</div></div><div class="ht-score-wrap"><span class="ht-score">78</span><div class="ht-bar-bg"><div class="ht-bar" style="width:78%"></div></div></div></li>
+        <li class="ht-country top"><span class="ht-rank">1</span><span class="ht-flag">&#127477;&#127481;</span><div class="ht-info"><div class="ht-cname" data-i18n="c_portugal">Portugal</div><div class="ht-cdetail" data-i18n="c_portugal_d">Strong match across 8 pillars</div></div><div class="ht-score-wrap"><span class="ht-score">92</span><div class="ht-bar-bg"><div class="ht-bar" style="width:92%"></div></div></div></li>
+        <li class="ht-country"><span class="ht-rank">2</span><span class="ht-flag">&#127466;&#127480;</span><div class="ht-info"><div class="ht-cname" data-i18n="c_spain">Spain</div><div class="ht-cdetail" data-i18n="c_spain_d">High on work-life balance</div></div><div class="ht-score-wrap"><span class="ht-score">87</span><div class="ht-bar-bg"><div class="ht-bar" style="width:87%"></div></div></div></li>
+        <li class="ht-country"><span class="ht-rank">3</span><span class="ht-flag">&#127464;&#127487;</span><div class="ht-info"><div class="ht-cname" data-i18n="c_czech">Czech Republic</div><div class="ht-cdetail" data-i18n="c_czech_d">Excellent cost-to-income ratio</div></div><div class="ht-score-wrap"><span class="ht-score">84</span><div class="ht-bar-bg"><div class="ht-bar" style="width:84%"></div></div></div></li>
+        <li class="ht-country"><span class="ht-rank">4</span><span class="ht-flag">&#127465;&#127466;</span><div class="ht-info"><div class="ht-cname" data-i18n="c_germany">Germany</div><div class="ht-cdetail" data-i18n="c_germany_d">Top healthcare & safety</div></div><div class="ht-score-wrap"><span class="ht-score">81</span><div class="ht-bar-bg"><div class="ht-bar" style="width:81%"></div></div></div></li>
+        <li class="ht-country"><span class="ht-rank">5</span><span class="ht-flag">&#127475;&#127473;</span><div class="ht-info"><div class="ht-cname" data-i18n="c_netherlands">Netherlands</div><div class="ht-cdetail" data-i18n="c_netherlands_d">Strong community & jobs</div></div><div class="ht-score-wrap"><span class="ht-score">78</span><div class="ht-bar-bg"><div class="ht-bar" style="width:78%"></div></div></div></li>
       </ul>
       <div class="ht-hint">
         <span class="ht-hint-icon">&#9656;</span>
-        <span class="ht-hint-text">Add more about yourself to refine your ranking. The more Hek<em>ai</em> knows, the more precise your matches become.</span>
+        <span class="ht-hint-text" data-i18n-html="ht_hint">Add more about yourself to refine your ranking. The more Hek<em>ai</em> knows, the more precise your matches become.</span>
       </div>
     </div>
   </div>
@@ -376,19 +400,338 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 <!-- ===== CLOSING ===== -->
 <section class="closing">
   <div class="closing-glow"></div>
-  <p class="closing-quote reveal">
+  <p class="closing-quote reveal" data-i18n-html="closing_quote">
     Like an eclipse that transforms everything it touches,<br>
     we believe that <em>every person we reach</em> carries forward<br>
     a light that changes the world around them —<br>
     one life, one phase, one <em>great crossing</em> at a time.
   </p>
   <div class="closing-line reveal"></div>
-  <p class="closing-motto reveal">For a better humanity</p>
+  <p class="closing-motto reveal" data-i18n="hero_motto">For a better humanity</p>
 </section>
 
 <footer><p>&copy; Eclipsion O&Uuml; 2022 &mdash; <a href="https://eclipsion.org" target="_blank">eclipsion.org</a></p></footer>
 
 <script>
+// ===== TRANSLATIONS =====
+const T = {
+en: {
+  hero_motto: "For a better humanity",
+  discover: "Discover",
+  intro_text: 'Life is full of big changes — relocating to a new country, starting a business, navigating taxes in a new system, getting married, taking out a loan.<br><br><em>Eclipsion helps you understand what you\'re getting into.</em><br><br>We provide precise calculations, clear information, and honest analysis of trade-offs — so you can make the best decisions for your life. When you need a specialist, we connect you with the right one. And we stay with you long after everyone else is gone.',
+  what_headline: 'When life changes, you deserve <em>clarity</em> — not guesswork',
+  calc_title: "Precise Calculations", calc_desc: "Finances, cost of living, tax implications, loan comparisons — real numbers, not estimates. Data you can make decisions with.",
+  trade_title: "Clear Trade-Offs", trade_desc: "Every big decision has pros and cons. We lay them out honestly so you see the full picture before you commit.",
+  conn_title: "Right Connections", conn_desc: "When you need a lawyer, tax advisor, or specialist — we connect you with trusted professionals. No middlemen, no confusion.",
+  tag_reloc: "Relocating abroad", tag_tax: "Tax planning", tag_free: "Freelancer setup", tag_loan: "Loans & mortgages", tag_marry: "Getting married", tag_cost: "Cost of living analysis", tag_visa: "Visa & residency", tag_biz: "Starting a business",
+  what_bridge: 'We structured our approach around the most powerful transformation in nature — <em>the eclipse</em>. Three phases. From preparation to crossing to life-long support.',
+  framework_label: "Our Framework", phases_title: "The Three Phases",
+  phase1_num: "Phase I", phase1_name: "Before the Eclipse", phase1_sub: "Discovery & Preparation",
+  phase1_desc: 'We begin where most don\'t — <strong>before the journey starts</strong>. Listening. Understanding who you are, what you carry, where you need to go. Mapping pathways with precision, assessing risk, calculating what lies ahead.',
+  phase2_num: "Phase II", phase2_name: "The Eclipse", phase2_sub: "The Great Crossing",
+  phase2_desc: 'The transformation itself — <strong>when everything changes</strong>. We are present through every stage of the crossing, from the first step to the moment you arrive on the other side.',
+  phase3_num: "Phase III", phase3_name: "After the Eclipse", phase3_sub: "Life-Long Continuity",
+  phase3_desc: 'Where others stop, <strong>we continue</strong>. Integration, growth, community, and a relationship that evolves with you. After the last contact, there is no goodbye — only a new chapter.',
+  transition_text: 'Our first tool brings <em>Phase I</em> to life.<br><br>A companion that helps you see which countries match your life —<br>with precise data, honest trade-offs, and a ranking that evolves<br>as you share more about who you are and where you want to go.',
+  hekai_tagline: "Find where your life works best",
+  roots: "Roots", meaning: "Meaning", far_reaching: "The far-reaching moment", assistant: "Assistant",
+  hekai_action: 'Hek<em>ai</em> in action',
+  theme_light: "Light", theme_dark: "Dark",
+  ht_question: "How do you earn your income?", ht_employment: "Employment", ht_freelancing: "Freelancing",
+  ht_best_matches: "Best matches for you",
+  c_portugal: "Portugal", c_portugal_d: "Strong match across 8 pillars",
+  c_spain: "Spain", c_spain_d: "High on work-life balance",
+  c_czech: "Czech Republic", c_czech_d: "Excellent cost-to-income ratio",
+  c_germany: "Germany", c_germany_d: "Top healthcare & safety",
+  c_netherlands: "Netherlands", c_netherlands_d: "Strong community & jobs",
+  ht_hint: 'Add more about yourself to refine your ranking. The more Hek<em>ai</em> knows, the more precise your matches become.',
+  closing_quote: 'Like an eclipse that transforms everything it touches,<br>we believe that <em>every person we reach</em> carries forward<br>a light that changes the world around them —<br>one life, one phase, one <em>great crossing</em> at a time.'
+},
+sk: {
+  hero_motto: "Pre lepšie ľudstvo",
+  discover: "Objavte",
+  intro_text: 'Život je plný veľkých zmien — sťahovanie do novej krajiny, zakladanie firmy, orientácia v daňovom systéme, svadba, hypotéka.<br><br><em>Eclipsion vám pomôže pochopiť, do čoho idete.</em><br><br>Poskytujeme presné výpočty, jasné informácie a čestnú analýzu výhod a nevýhod — aby ste sa mohli rozhodnúť čo najlepšie. Keď potrebujete odborníka, spojíme vás s tým správnym. A zostávame s vami dlho po tom, čo všetci ostatní odídu.',
+  what_headline: 'Keď sa život mení, zaslúžite si <em>jasnosť</em> — nie dohady',
+  calc_title: "Presné výpočty", calc_desc: "Financie, životné náklady, daňové dopady, porovnanie úverov — reálne čísla, nie odhady. Dáta, podľa ktorých sa dá rozhodnúť.",
+  trade_title: "Jasné kompromisy", trade_desc: "Každé veľké rozhodnutie má klady aj zápory. Ukážeme ich čestne, aby ste videli celý obraz, než sa rozhodnete.",
+  conn_title: "Správne kontakty", conn_desc: "Keď potrebujete právnika, daňového poradcu alebo špecialistu — spojíme vás s overenými profesionálmi. Žiadni prostredníci, žiadny zmätok.",
+  tag_reloc: "Sťahovanie do zahraničia", tag_tax: "Daňové plánovanie", tag_free: "Nastavenie pre freelancerov", tag_loan: "Úvery a hypotéky", tag_marry: "Svadba", tag_cost: "Analýza životných nákladov", tag_visa: "Víza a pobyt", tag_biz: "Zakladanie firmy",
+  what_bridge: 'Náš prístup sme postavili okolo najsilnejšej premeny v prírode — <em>zatmenia</em>. Tri fázy. Od prípravy cez prechod až po celoživotnú podporu.',
+  framework_label: "Náš rámec", phases_title: "Tri fázy",
+  phase1_num: "Fáza I", phase1_name: "Pred zatmením", phase1_sub: "Prieskum a príprava",
+  phase1_desc: 'Začíname tam, kde väčšina nezačne — <strong>pred začiatkom cesty</strong>. Počúvame. Chápeme, kto ste, čo si nesiete, kam potrebujete ísť. Mapujeme cesty s presnosťou, hodnotíme riziká, počítame, čo vás čaká.',
+  phase2_num: "Fáza II", phase2_name: "Zatmenie", phase2_sub: "Veľký prechod",
+  phase2_desc: 'Samotná premena — <strong>keď sa všetko mení</strong>. Sme prítomní počas každej fázy prechodu, od prvého kroku až po chvíľu, keď prídete na druhú stranu.',
+  phase3_num: "Fáza III", phase3_name: "Po zatmení", phase3_sub: "Celoživotná kontinuita",
+  phase3_desc: 'Kde ostatní prestanú, <strong>my pokračujeme</strong>. Integrácia, rast, komunita a vzťah, ktorý sa vyvíja spolu s vami. Po poslednom kontakte sa nelúčime — začíname novú kapitolu.',
+  transition_text: 'Náš prvý nástroj dáva <em>Fáze I</em> život.<br><br>Spoločník, ktorý vám pomôže zistiť, ktoré krajiny zodpovedajú vášmu životu —<br>s presnými dátami, čestnými kompromismi a rebríčkom, ktorý sa vyvíja,<br>keď nám prezradíte viac o sebe a o tom, kam chcete ísť.',
+  hekai_tagline: "Nájdite, kde váš život funguje najlepšie",
+  roots: "Korene", meaning: "Význam", far_reaching: "Ďalekosiahly okamih", assistant: "Asistent",
+  hekai_action: 'Hek<em>ai</em> v akcii',
+  theme_light: "Svetlý", theme_dark: "Tmavý",
+  ht_question: "Ako zarábate?", ht_employment: "Zamestnanec", ht_freelancing: "Freelancer",
+  ht_best_matches: "Najlepšie zhody pre vás",
+  c_portugal: "Portugalsko", c_portugal_d: "Silná zhoda v 8 pilieroch",
+  c_spain: "Španielsko", c_spain_d: "Vysoká rovnováha práce a života",
+  c_czech: "Česká republika", c_czech_d: "Výborný pomer nákladov a príjmu",
+  c_germany: "Nemecko", c_germany_d: "Špičkové zdravotníctvo a bezpečnosť",
+  c_netherlands: "Holandsko", c_netherlands_d: "Silná komunita a pracovné príležitosti",
+  ht_hint: 'Pridajte o sebe viac a spresníte rebríček. Čím viac Hek<em>ai</em> vie, tým presnejšie sú vaše zhody.',
+  closing_quote: 'Tak ako zatmenie premení všetko, čoho sa dotkne,<br>veríme, že <em>každý človek, ku ktorému sa dostaneme</em>, nesie ďalej<br>svetlo, ktoré mení svet okolo —<br>jeden život, jedna fáza, jeden <em>veľký prechod</em>.'
+},
+cs: {
+  hero_motto: "Pro lepší lidstvo",
+  discover: "Objevte",
+  intro_text: 'Život je plný velkých změn — stěhování do nové země, zakládání firmy, orientace v daňovém systému, svatba, hypotéka.<br><br><em>Eclipsion vám pomůže pochopit, do čeho jdete.</em><br><br>Poskytujeme přesné výpočty, jasné informace a upřímnou analýzu výhod a nevýhod — abyste se mohli rozhodovat co nejlépe. Když potřebujete odborníka, spojíme vás s tím správným. A zůstáváme s vámi dlouho poté, co všichni ostatní odejdou.',
+  what_headline: 'Když se život mění, zasloužíte si <em>jasnost</em> — ne dohady',
+  calc_title: "Přesné výpočty", calc_desc: "Finance, životní náklady, daňové dopady, srovnání úvěrů — reálná čísla, ne odhady. Data, podle kterých se dá rozhodovat.",
+  trade_title: "Jasné kompromisy", trade_desc: "Každé velké rozhodnutí má klady i zápory. Ukážeme je upřímně, abyste viděli celý obraz, než se rozhodnete.",
+  conn_title: "Správné kontakty", conn_desc: "Když potřebujete právníka, daňového poradce nebo specialistu — spojíme vás s ověřenými profesionály. Žádní prostředníci, žádný zmatek.",
+  tag_reloc: "Stěhování do zahraničí", tag_tax: "Daňové plánování", tag_free: "Nastavení pro freelancery", tag_loan: "Úvěry a hypotéky", tag_marry: "Svatba", tag_cost: "Analýza životních nákladů", tag_visa: "Víza a pobyt", tag_biz: "Zakládání firmy",
+  what_bridge: 'Náš přístup jsme postavili kolem nejmocnější proměny v přírodě — <em>zatmění</em>. Tři fáze. Od přípravy přes přechod až po celoživotní podporu.',
+  framework_label: "Náš rámec", phases_title: "Tři fáze",
+  phase1_num: "Fáze I", phase1_name: "Před zatměním", phase1_sub: "Průzkum a příprava",
+  phase1_desc: 'Začínáme tam, kde většina nezačne — <strong>před začátkem cesty</strong>. Nasloucháme. Chápeme, kdo jste, co si nesete, kam potřebujete jít. Mapujeme cesty s přesností, hodnotíme rizika, počítáme, co vás čeká.',
+  phase2_num: "Fáze II", phase2_name: "Zatmění", phase2_sub: "Velký přechod",
+  phase2_desc: 'Samotná proměna — <strong>když se vše mění</strong>. Jsme přítomni během každé fáze přechodu, od prvního kroku až po okamžik, kdy dorazíte na druhou stranu.',
+  phase3_num: "Fáze III", phase3_name: "Po zatmění", phase3_sub: "Celoživotní kontinuita",
+  phase3_desc: 'Kde ostatní přestanou, <strong>my pokračujeme</strong>. Integrace, růst, komunita a vztah, který se vyvíjí spolu s vámi. Po posledním kontaktu se neloučíme — začínáme novou kapitolu.',
+  transition_text: 'Náš první nástroj dává <em>Fázi I</em> život.<br><br>Společník, který vám pomůže zjistit, které země odpovídají vašemu životu —<br>s přesnými daty, upřímnými kompromisy a žebříčkem, který se vyvíjí,<br>když nám prozradíte víc o sobě a o tom, kam chcete jít.',
+  hekai_tagline: "Najděte, kde váš život funguje nejlépe",
+  roots: "Kořeny", meaning: "Význam", far_reaching: "Dalekosáhlý okamžik", assistant: "Asistent",
+  hekai_action: 'Hek<em>ai</em> v akci',
+  theme_light: "Světlý", theme_dark: "Tmavý",
+  ht_question: "Jak vyděláváte?", ht_employment: "Zaměstnanec", ht_freelancing: "Freelancer",
+  ht_best_matches: "Nejlepší shody pro vás",
+  c_portugal: "Portugalsko", c_portugal_d: "Silná shoda v 8 pilířích",
+  c_spain: "Španělsko", c_spain_d: "Vysoká rovnováha práce a života",
+  c_czech: "Česká republika", c_czech_d: "Výborný poměr nákladů a příjmu",
+  c_germany: "Německo", c_germany_d: "Špičkové zdravotnictví a bezpečnost",
+  c_netherlands: "Nizozemsko", c_netherlands_d: "Silná komunita a pracovní příležitosti",
+  ht_hint: 'Přidejte o sobě víc a zpřesníte žebříček. Čím víc Hek<em>ai</em> ví, tím přesnější jsou vaše shody.',
+  closing_quote: 'Tak jako zatmění promění vše, čeho se dotkne,<br>věříme, že <em>každý člověk, ke kterému se dostaneme</em>, nese dál<br>světlo, které mění svět kolem —<br>jeden život, jedna fáze, jeden <em>velký přechod</em>.'
+},
+pl: {
+  hero_motto: "Dla lepszej ludzkości",
+  discover: "Odkryj",
+  intro_text: 'Życie jest pełne wielkich zmian — przeprowadzka do nowego kraju, zakładanie firmy, poruszanie się w nowym systemie podatkowym, ślub, kredyt.<br><br><em>Eclipsion pomaga zrozumieć, w co się wchodzi.</em><br><br>Dostarczamy precyzyjne obliczenia, jasne informacje i uczciwą analizę kompromisów — abyś mógł podejmować najlepsze decyzje. Kiedy potrzebujesz specjalisty, łączymy Cię z właściwym. I zostajemy z Tobą długo po tym, jak wszyscy inni odejdą.',
+  what_headline: 'Gdy życie się zmienia, zasługujesz na <em>jasność</em> — nie domysły',
+  calc_title: "Precyzyjne obliczenia", calc_desc: "Finanse, koszty życia, skutki podatkowe, porównania kredytów — realne liczby, nie szacunki. Dane, na których można opierać decyzje.",
+  trade_title: "Jasne kompromisy", trade_desc: "Każda wielka decyzja ma plusy i minusy. Przedstawiamy je uczciwie, abyś widział pełny obraz, zanim się zdecydujesz.",
+  conn_title: "Właściwe kontakty", conn_desc: "Kiedy potrzebujesz prawnika, doradcy podatkowego lub specjalisty — łączymy Cię z zaufanymi profesjonalistami. Bez pośredników, bez zamieszania.",
+  tag_reloc: "Przeprowadzka za granicę", tag_tax: "Planowanie podatkowe", tag_free: "Konfiguracja dla freelancerów", tag_loan: "Kredyty i hipoteki", tag_marry: "Ślub", tag_cost: "Analiza kosztów życia", tag_visa: "Wizy i pobyt", tag_biz: "Zakładanie firmy",
+  what_bridge: 'Naszą metodologię oparliśmy na najpotężniejszej przemianie w naturze — <em>zaćmieniu</em>. Trzy fazy. Od przygotowania przez przejście po wsparcie na całe życie.',
+  framework_label: "Nasz framework", phases_title: "Trzy fazy",
+  phase1_num: "Faza I", phase1_name: "Przed zaćmieniem", phase1_sub: "Odkrywanie i przygotowanie",
+  phase1_desc: 'Zaczynamy tam, gdzie większość nie zaczyna — <strong>przed rozpoczęciem podróży</strong>. Słuchamy. Rozumiemy, kim jesteś, co ze sobą niesiesz, dokąd musisz iść. Mapujemy ścieżki z precyzją, oceniamy ryzyko, obliczamy, co czeka.',
+  phase2_num: "Faza II", phase2_name: "Zaćmienie", phase2_sub: "Wielkie przejście",
+  phase2_desc: 'Sama przemiana — <strong>gdy wszystko się zmienia</strong>. Jesteśmy obecni na każdym etapie przejścia, od pierwszego kroku po moment, gdy dotrzesz na drugą stronę.',
+  phase3_num: "Faza III", phase3_name: "Po zaćmieniu", phase3_sub: "Ciągłość na całe życie",
+  phase3_desc: 'Gdzie inni się zatrzymują, <strong>my kontynuujemy</strong>. Integracja, rozwój, społeczność i relacja, która ewoluuje razem z Tobą. Po ostatnim kontakcie nie ma pożegnania — jest nowy rozdział.',
+  transition_text: 'Nasze pierwsze narzędzie ożywia <em>Fazę I</em>.<br><br>Towarzysz, który pomaga zobaczyć, które kraje pasują do Twojego życia —<br>z precyzyjnymi danymi, uczciwymi kompromisami i rankingiem, który się rozwija,<br>gdy dzielisz się tym, kim jesteś i dokąd chcesz zmierzać.',
+  hekai_tagline: "Znajdź, gdzie Twoje życie działa najlepiej",
+  roots: "Korzenie", meaning: "Znaczenie", far_reaching: "Dalekosięzny moment", assistant: "Asystent",
+  hekai_action: 'Hek<em>ai</em> w akcji',
+  theme_light: "Jasny", theme_dark: "Ciemny",
+  ht_question: "Jak zarabiasz?", ht_employment: "Etat", ht_freelancing: "Freelancing",
+  ht_best_matches: "Najlepsze dopasowania",
+  c_portugal: "Portugalia", c_portugal_d: "Silne dopasowanie w 8 filarach",
+  c_spain: "Hiszpania", c_spain_d: "Wysoka równowaga praca-życie",
+  c_czech: "Czechy", c_czech_d: "Doskonały stosunek kosztów do dochodów",
+  c_germany: "Niemcy", c_germany_d: "Najlepsza opieka zdrowotna i bezpieczeństwo",
+  c_netherlands: "Holandia", c_netherlands_d: "Silna społeczność i praca",
+  ht_hint: 'Dodaj więcej o sobie, aby doprecyzować ranking. Im więcej Hek<em>ai</em> wie, tym trafniejsze są dopasowania.',
+  closing_quote: 'Tak jak zaćmienie przemienia wszystko, czego dotknie,<br>wierzymy, że <em>każda osoba, do której dotrzemy</em>, niesie dalej<br>światło, które zmienia świat wokół —<br>jedno życie, jedna faza, jedno <em>wielkie przejście</em>.'
+},
+de: {
+  hero_motto: "Für eine bessere Menschheit",
+  discover: "Entdecken",
+  intro_text: 'Das Leben ist voller großer Veränderungen — Umzug in ein neues Land, Firmengründung, Navigation im Steuersystem, Heirat, Kreditaufnahme.<br><br><em>Eclipsion hilft Ihnen zu verstehen, worauf Sie sich einlassen.</em><br><br>Wir liefern präzise Berechnungen, klare Informationen und eine ehrliche Analyse von Kompromissen — damit Sie die besten Entscheidungen für Ihr Leben treffen können. Wenn Sie einen Spezialisten brauchen, verbinden wir Sie mit dem richtigen. Und wir bleiben bei Ihnen, lange nachdem alle anderen gegangen sind.',
+  what_headline: 'Wenn sich das Leben ändert, verdienen Sie <em>Klarheit</em> — keine Vermutungen',
+  calc_title: "Präzise Berechnungen", calc_desc: "Finanzen, Lebenshaltungskosten, steuerliche Auswirkungen, Kreditvergleiche — echte Zahlen, keine Schätzungen. Daten, mit denen Sie Entscheidungen treffen können.",
+  trade_title: "Klare Kompromisse", trade_desc: "Jede große Entscheidung hat Vor- und Nachteile. Wir legen sie ehrlich dar, damit Sie das vollständige Bild sehen, bevor Sie sich entscheiden.",
+  conn_title: "Die richtigen Kontakte", conn_desc: "Wenn Sie einen Anwalt, Steuerberater oder Spezialisten brauchen — wir verbinden Sie mit vertrauenswürdigen Fachleuten. Keine Mittelsmänner, keine Verwirrung.",
+  tag_reloc: "Umzug ins Ausland", tag_tax: "Steuerplanung", tag_free: "Freelancer-Setup", tag_loan: "Kredite & Hypotheken", tag_marry: "Heirat", tag_cost: "Lebenshaltungskosten-Analyse", tag_visa: "Visum & Aufenthalt", tag_biz: "Firmengründung",
+  what_bridge: 'Wir haben unseren Ansatz um die mächtigste Transformation der Natur strukturiert — <em>die Sonnenfinsternis</em>. Drei Phasen. Von der Vorbereitung über den Übergang bis zur lebenslangen Unterstützung.',
+  framework_label: "Unser Framework", phases_title: "Die drei Phasen",
+  phase1_num: "Phase I", phase1_name: "Vor der Finsternis", phase1_sub: "Erkundung & Vorbereitung",
+  phase1_desc: 'Wir beginnen dort, wo die meisten es nicht tun — <strong>bevor die Reise beginnt</strong>. Zuhören. Verstehen, wer Sie sind, was Sie mitbringen, wohin Sie müssen. Wege präzise kartieren, Risiken bewerten, berechnen, was vor Ihnen liegt.',
+  phase2_num: "Phase II", phase2_name: "Die Finsternis", phase2_sub: "Der große Übergang",
+  phase2_desc: 'Die Transformation selbst — <strong>wenn sich alles ändert</strong>. Wir sind in jeder Phase des Übergangs präsent, vom ersten Schritt bis zu dem Moment, in dem Sie auf der anderen Seite ankommen.',
+  phase3_num: "Phase III", phase3_name: "Nach der Finsternis", phase3_sub: "Lebenslange Kontinuität",
+  phase3_desc: 'Wo andere aufhören, <strong>machen wir weiter</strong>. Integration, Wachstum, Gemeinschaft und eine Beziehung, die sich mit Ihnen weiterentwickelt. Nach dem letzten Kontakt gibt es kein Abschied — nur ein neues Kapitel.',
+  transition_text: 'Unser erstes Werkzeug erweckt <em>Phase I</em> zum Leben.<br><br>Ein Begleiter, der Ihnen hilft zu sehen, welche Länder zu Ihrem Leben passen —<br>mit präzisen Daten, ehrlichen Kompromissen und einem Ranking, das sich entwickelt,<br>je mehr Sie über sich und Ihre Ziele verraten.',
+  hekai_tagline: "Finden Sie, wo Ihr Leben am besten funktioniert",
+  roots: "Wurzeln", meaning: "Bedeutung", far_reaching: "Der weitreichende Moment", assistant: "Assistent",
+  hekai_action: 'Hek<em>ai</em> in Aktion',
+  theme_light: "Hell", theme_dark: "Dunkel",
+  ht_question: "Wie verdienen Sie Ihr Einkommen?", ht_employment: "Angestellt", ht_freelancing: "Freelancing",
+  ht_best_matches: "Beste Treffer für Sie",
+  c_portugal: "Portugal", c_portugal_d: "Starke Übereinstimmung in 8 Säulen",
+  c_spain: "Spanien", c_spain_d: "Hohe Work-Life-Balance",
+  c_czech: "Tschechische Republik", c_czech_d: "Hervorragendes Kosten-Einkommens-Verhältnis",
+  c_germany: "Deutschland", c_germany_d: "Top Gesundheitswesen & Sicherheit",
+  c_netherlands: "Niederlande", c_netherlands_d: "Starke Gemeinschaft & Arbeitsmarkt",
+  ht_hint: 'Geben Sie mehr über sich an, um Ihr Ranking zu verfeinern. Je mehr Hek<em>ai</em> weiß, desto präziser werden Ihre Treffer.',
+  closing_quote: 'Wie eine Finsternis, die alles verwandelt, was sie berührt,<br>glauben wir, dass <em>jeder Mensch, den wir erreichen</em>, ein Licht weiterträgt,<br>das die Welt um ihn verändert —<br>ein Leben, eine Phase, ein <em>großer Übergang</em>.'
+},
+es: {
+  hero_motto: "Por una humanidad mejor",
+  discover: "Descubrir",
+  intro_text: 'La vida está llena de grandes cambios — mudarse a un nuevo país, emprender un negocio, navegar un nuevo sistema fiscal, casarse, pedir un préstamo.<br><br><em>Eclipsion te ayuda a entender en lo que te estás metiendo.</em><br><br>Proporcionamos cálculos precisos, información clara y un análisis honesto de ventajas y desventajas — para que puedas tomar las mejores decisiones para tu vida. Cuando necesitas un especialista, te conectamos con el adecuado. Y nos quedamos contigo mucho después de que todos se hayan ido.',
+  what_headline: 'Cuando la vida cambia, mereces <em>claridad</em> — no suposiciones',
+  calc_title: "Cálculos precisos", calc_desc: "Finanzas, coste de vida, implicaciones fiscales, comparación de préstamos — números reales, no estimaciones. Datos con los que tomar decisiones.",
+  trade_title: "Compromisos claros", trade_desc: "Toda gran decisión tiene pros y contras. Los exponemos con honestidad para que veas el panorama completo antes de decidir.",
+  conn_title: "Conexiones adecuadas", conn_desc: "Cuando necesitas un abogado, asesor fiscal o especialista — te conectamos con profesionales de confianza. Sin intermediarios, sin confusión.",
+  tag_reloc: "Mudanza al extranjero", tag_tax: "Planificación fiscal", tag_free: "Configuración freelance", tag_loan: "Préstamos e hipotecas", tag_marry: "Boda", tag_cost: "Análisis de coste de vida", tag_visa: "Visados y residencia", tag_biz: "Emprender un negocio",
+  what_bridge: 'Estructuramos nuestro enfoque en torno a la transformación más poderosa de la naturaleza — <em>el eclipse</em>. Tres fases. De la preparación al cruce y al apoyo de por vida.',
+  framework_label: "Nuestro marco", phases_title: "Las tres fases",
+  phase1_num: "Fase I", phase1_name: "Antes del eclipse", phase1_sub: "Descubrimiento y preparación",
+  phase1_desc: 'Comenzamos donde la mayoría no lo hace — <strong>antes de que empiece el viaje</strong>. Escuchando. Entendiendo quién eres, qué llevas contigo, adónde necesitas ir. Trazando caminos con precisión, evaluando riesgos, calculando lo que viene.',
+  phase2_num: "Fase II", phase2_name: "El eclipse", phase2_sub: "El gran cruce",
+  phase2_desc: 'La transformación misma — <strong>cuando todo cambia</strong>. Estamos presentes en cada etapa del cruce, desde el primer paso hasta el momento en que llegas al otro lado.',
+  phase3_num: "Fase III", phase3_name: "Después del eclipse", phase3_sub: "Continuidad de por vida",
+  phase3_desc: 'Donde otros se detienen, <strong>nosotros continuamos</strong>. Integración, crecimiento, comunidad y una relación que evoluciona contigo. Tras el último contacto, no hay despedida — solo un nuevo capítulo.',
+  transition_text: 'Nuestra primera herramienta da vida a la <em>Fase I</em>.<br><br>Un compañero que te ayuda a ver qué países encajan con tu vida —<br>con datos precisos, compromisos honestos y un ranking que evoluciona<br>a medida que compartes más sobre quién eres y adónde quieres ir.',
+  hekai_tagline: "Encuentra donde tu vida funciona mejor",
+  roots: "Raíces", meaning: "Significado", far_reaching: "El momento de largo alcance", assistant: "Asistente",
+  hekai_action: 'Hek<em>ai</em> en acción',
+  theme_light: "Claro", theme_dark: "Oscuro",
+  ht_question: "¿Cómo obtienes tus ingresos?", ht_employment: "Empleo", ht_freelancing: "Freelance",
+  ht_best_matches: "Mejores coincidencias para ti",
+  c_portugal: "Portugal", c_portugal_d: "Alta coincidencia en 8 pilares",
+  c_spain: "España", c_spain_d: "Alto equilibrio trabajo-vida",
+  c_czech: "República Checa", c_czech_d: "Excelente relación coste-ingreso",
+  c_germany: "Alemania", c_germany_d: "Sanidad y seguridad de primer nivel",
+  c_netherlands: "Países Bajos", c_netherlands_d: "Fuerte comunidad y empleo",
+  ht_hint: 'Añade más sobre ti para refinar tu ranking. Cuanto más sepa Hek<em>ai</em>, más precisas serán tus coincidencias.',
+  closing_quote: 'Como un eclipse que transforma todo lo que toca,<br>creemos que <em>cada persona que alcanzamos</em> lleva consigo<br>una luz que cambia el mundo a su alrededor —<br>una vida, una fase, un <em>gran cruce</em> a la vez.'
+},
+pt: {
+  hero_motto: "Por uma humanidade melhor",
+  discover: "Descobrir",
+  intro_text: 'A vida está cheia de grandes mudanças — mudar para um novo país, abrir um negócio, navegar um novo sistema fiscal, casar, contrair um empréstimo.<br><br><em>A Eclipsion ajuda-o a compreender no que se está a meter.</em><br><br>Fornecemos cálculos precisos, informações claras e uma análise honesta de compromissos — para que possa tomar as melhores decisões para a sua vida. Quando precisa de um especialista, conectamo-lo ao certo. E ficamos consigo muito depois de todos terem partido.',
+  what_headline: 'Quando a vida muda, você merece <em>clareza</em> — não suposições',
+  calc_title: "Cálculos precisos", calc_desc: "Finanças, custo de vida, implicações fiscais, comparação de empréstimos — números reais, não estimativas. Dados com os quais pode tomar decisões.",
+  trade_title: "Compromissos claros", trade_desc: "Toda grande decisão tem prós e contras. Apresentamo-los com honestidade para que veja o quadro completo antes de se comprometer.",
+  conn_title: "Conexões certas", conn_desc: "Quando precisa de um advogado, consultor fiscal ou especialista — conectamo-lo a profissionais de confiança. Sem intermediários, sem confusão.",
+  tag_reloc: "Mudança para o exterior", tag_tax: "Planeamento fiscal", tag_free: "Configuração freelancer", tag_loan: "Empréstimos e hipotecas", tag_marry: "Casamento", tag_cost: "Análise do custo de vida", tag_visa: "Vistos e residência", tag_biz: "Abrir um negócio",
+  what_bridge: 'Estruturámos a nossa abordagem em torno da transformação mais poderosa da natureza — <em>o eclipse</em>. Três fases. Da preparação à travessia ao apoio vitalício.',
+  framework_label: "A nossa metodologia", phases_title: "As três fases",
+  phase1_num: "Fase I", phase1_name: "Antes do eclipse", phase1_sub: "Descoberta e preparação",
+  phase1_desc: 'Começamos onde a maioria não começa — <strong>antes da viagem começar</strong>. A ouvir. A compreender quem é, o que carrega, para onde precisa ir. A mapear caminhos com precisão, a avaliar riscos, a calcular o que está pela frente.',
+  phase2_num: "Fase II", phase2_name: "O eclipse", phase2_sub: "A grande travessia",
+  phase2_desc: 'A transformação em si — <strong>quando tudo muda</strong>. Estamos presentes em cada etapa da travessia, desde o primeiro passo até ao momento em que chega ao outro lado.',
+  phase3_num: "Fase III", phase3_name: "Depois do eclipse", phase3_sub: "Continuidade vitalícia",
+  phase3_desc: 'Onde outros param, <strong>nós continuamos</strong>. Integração, crescimento, comunidade e uma relação que evolui consigo. Após o último contacto, não há despedida — apenas um novo capítulo.',
+  transition_text: 'A nossa primeira ferramenta dá vida à <em>Fase I</em>.<br><br>Um companheiro que o ajuda a ver quais países combinam com a sua vida —<br>com dados precisos, compromissos honestos e um ranking que evolui<br>à medida que partilha mais sobre quem é e para onde quer ir.',
+  hekai_tagline: "Encontre onde a sua vida funciona melhor",
+  roots: "Raízes", meaning: "Significado", far_reaching: "O momento de longo alcance", assistant: "Assistente",
+  hekai_action: 'Hek<em>ai</em> em ação',
+  theme_light: "Claro", theme_dark: "Escuro",
+  ht_question: "Como obtém os seus rendimentos?", ht_employment: "Emprego", ht_freelancing: "Freelancing",
+  ht_best_matches: "Melhores correspondências para si",
+  c_portugal: "Portugal", c_portugal_d: "Forte correspondência em 8 pilares",
+  c_spain: "Espanha", c_spain_d: "Alto equilíbrio trabalho-vida",
+  c_czech: "República Checa", c_czech_d: "Excelente rácio custo-rendimento",
+  c_germany: "Alemanha", c_germany_d: "Saúde e segurança de topo",
+  c_netherlands: "Países Baixos", c_netherlands_d: "Comunidade forte e emprego",
+  ht_hint: 'Adicione mais sobre si para refinar o seu ranking. Quanto mais o Hek<em>ai</em> souber, mais precisas serão as suas correspondências.',
+  closing_quote: 'Como um eclipse que transforma tudo o que toca,<br>acreditamos que <em>cada pessoa que alcançamos</em> carrega consigo<br>uma luz que muda o mundo ao seu redor —<br>uma vida, uma fase, uma <em>grande travessia</em> de cada vez.'
+},
+fr: {
+  hero_motto: "Pour une humanité meilleure",
+  discover: "Découvrir",
+  intro_text: 'La vie est pleine de grands changements — déménager dans un nouveau pays, créer une entreprise, naviguer dans un nouveau système fiscal, se marier, contracter un prêt.<br><br><em>Eclipsion vous aide à comprendre dans quoi vous vous engagez.</em><br><br>Nous fournissons des calculs précis, des informations claires et une analyse honnête des compromis — pour que vous puissiez prendre les meilleures décisions pour votre vie. Quand vous avez besoin d\'un spécialiste, nous vous connectons au bon. Et nous restons avec vous bien après que tous les autres soient partis.',
+  what_headline: 'Quand la vie change, vous méritez de la <em>clarté</em> — pas des suppositions',
+  calc_title: "Calculs précis", calc_desc: "Finances, coût de la vie, implications fiscales, comparaisons de prêts — des chiffres réels, pas des estimations. Des données sur lesquelles fonder vos décisions.",
+  trade_title: "Compromis clairs", trade_desc: "Toute grande décision a des avantages et des inconvénients. Nous les présentons honnêtement pour que vous voyiez le tableau complet avant de vous engager.",
+  conn_title: "Les bonnes connexions", conn_desc: "Quand vous avez besoin d'un avocat, d'un conseiller fiscal ou d'un spécialiste — nous vous connectons à des professionnels de confiance. Pas d'intermédiaires, pas de confusion.",
+  tag_reloc: "Déménagement à l'étranger", tag_tax: "Planification fiscale", tag_free: "Configuration freelance", tag_loan: "Prêts et hypothèques", tag_marry: "Mariage", tag_cost: "Analyse du coût de la vie", tag_visa: "Visa et résidence", tag_biz: "Création d'entreprise",
+  what_bridge: 'Nous avons structuré notre approche autour de la transformation la plus puissante de la nature — <em>l\'éclipse</em>. Trois phases. De la préparation à la traversée au soutien à vie.',
+  framework_label: "Notre cadre", phases_title: "Les trois phases",
+  phase1_num: "Phase I", phase1_name: "Avant l'éclipse", phase1_sub: "Découverte et préparation",
+  phase1_desc: 'Nous commençons là où la plupart ne commencent pas — <strong>avant que le voyage ne débute</strong>. Écouter. Comprendre qui vous êtes, ce que vous portez, où vous devez aller. Tracer des chemins avec précision, évaluer les risques, calculer ce qui vous attend.',
+  phase2_num: "Phase II", phase2_name: "L'éclipse", phase2_sub: "La grande traversée",
+  phase2_desc: 'La transformation elle-même — <strong>quand tout change</strong>. Nous sommes présents à chaque étape de la traversée, du premier pas au moment où vous arrivez de l\'autre côté.',
+  phase3_num: "Phase III", phase3_name: "Après l'éclipse", phase3_sub: "Continuité à vie",
+  phase3_desc: 'Là où d\'autres s\'arrêtent, <strong>nous continuons</strong>. Intégration, croissance, communauté et une relation qui évolue avec vous. Après le dernier contact, il n\'y a pas d\'adieu — seulement un nouveau chapitre.',
+  transition_text: 'Notre premier outil donne vie à la <em>Phase I</em>.<br><br>Un compagnon qui vous aide à voir quels pays correspondent à votre vie —<br>avec des données précises, des compromis honnêtes et un classement qui évolue<br>à mesure que vous partagez qui vous êtes et où vous voulez aller.',
+  hekai_tagline: "Trouvez où votre vie fonctionne le mieux",
+  roots: "Racines", meaning: "Signification", far_reaching: "Le moment décisif", assistant: "Assistant",
+  hekai_action: 'Hek<em>ai</em> en action',
+  theme_light: "Clair", theme_dark: "Sombre",
+  ht_question: "Comment gagnez-vous vos revenus ?", ht_employment: "Emploi", ht_freelancing: "Freelance",
+  ht_best_matches: "Meilleures correspondances pour vous",
+  c_portugal: "Portugal", c_portugal_d: "Forte correspondance sur 8 piliers",
+  c_spain: "Espagne", c_spain_d: "Bon équilibre travail-vie",
+  c_czech: "République tchèque", c_czech_d: "Excellent ratio coût-revenu",
+  c_germany: "Allemagne", c_germany_d: "Santé et sécurité de premier ordre",
+  c_netherlands: "Pays-Bas", c_netherlands_d: "Communauté forte et emploi",
+  ht_hint: 'Ajoutez plus d\'informations sur vous pour affiner votre classement. Plus Hek<em>ai</em> en sait, plus vos correspondances sont précises.',
+  closing_quote: 'Comme une éclipse qui transforme tout ce qu\'elle touche,<br>nous croyons que <em>chaque personne que nous atteignons</em> porte en elle<br>une lumière qui change le monde autour —<br>une vie, une phase, une <em>grande traversée</em> à la fois.'
+},
+uk: {
+  hero_motto: "Заради кращого людства",
+  discover: "Відкрити",
+  intro_text: 'Життя сповнене великих змін — переїзд до нової країни, відкриття бізнесу, орієнтація в податковій системі, одруження, кредит.<br><br><em>Eclipsion допомагає зрозуміти, у що ви вступаєте.</em><br><br>Ми надаємо точні розрахунки, чітку інформацію та чесний аналіз компромісів — щоб ви могли приймати найкращі рішення для свого життя. Коли вам потрібен спеціаліст, ми з\'єднаємо вас із правильним. І ми залишаємося з вами ще довго після того, як усі інші підуть.',
+  what_headline: 'Коли життя змінюється, ви заслуговуєте на <em>ясність</em> — не на здогадки',
+  calc_title: "Точні розрахунки", calc_desc: "Фінанси, вартість життя, податкові наслідки, порівняння кредитів — реальні цифри, не оцінки. Дані, на основі яких можна приймати рішення.",
+  trade_title: "Чіткі компроміси", trade_desc: "Кожне велике рішення має плюси та мінуси. Ми подаємо їх чесно, щоб ви бачили повну картину, перш ніж вирішити.",
+  conn_title: "Правильні контакти", conn_desc: "Коли вам потрібен юрист, податковий консультант або спеціаліст — ми з'єднуємо вас із перевіреними професіоналами. Без посередників, без плутанини.",
+  tag_reloc: "Переїзд за кордон", tag_tax: "Податкове планування", tag_free: "Налаштування для фрілансерів", tag_loan: "Кредити та іпотеки", tag_marry: "Одруження", tag_cost: "Аналіз вартості життя", tag_visa: "Візи та проживання", tag_biz: "Відкриття бізнесу",
+  what_bridge: 'Ми побудували наш підхід навколо наймогутнішої трансформації в природі — <em>затемнення</em>. Три фази. Від підготовки через перехід до підтримки на все життя.',
+  framework_label: "Наш фреймворк", phases_title: "Три фази",
+  phase1_num: "Фаза I", phase1_name: "Перед затемненням", phase1_sub: "Дослідження та підготовка",
+  phase1_desc: 'Ми починаємо там, де більшість не починає — <strong>до початку подорожі</strong>. Слухаємо. Розуміємо, хто ви, що несете із собою, куди вам потрібно. Прокладаємо шляхи з точністю, оцінюємо ризики, рахуємо, що попереду.',
+  phase2_num: "Фаза II", phase2_name: "Затемнення", phase2_sub: "Великий перехід",
+  phase2_desc: 'Сама трансформація — <strong>коли все змінюється</strong>. Ми присутні на кожному етапі переходу, від першого кроку до моменту, коли ви опинитесь на іншому боці.',
+  phase3_num: "Фаза III", phase3_name: "Після затемнення", phase3_sub: "Безперервність на все життя",
+  phase3_desc: 'Де інші зупиняються, <strong>ми продовжуємо</strong>. Інтеграція, зростання, спільнота та стосунки, що розвиваються разом із вами. Після останнього контакту немає прощання — є лише новий розділ.',
+  transition_text: 'Наш перший інструмент оживляє <em>Фазу I</em>.<br><br>Супутник, який допомагає побачити, які країни підходять вашому життю —<br>із точними даними, чесними компромісами та рейтингом, що розвивається,<br>коли ви ділитесь більше про себе та про те, куди хочете йти.',
+  hekai_tagline: "Знайдіть, де ваше життя працює найкраще",
+  roots: "Коріння", meaning: "Значення", far_reaching: "Далекосяжний момент", assistant: "Асистент",
+  hekai_action: 'Hek<em>ai</em> у дії',
+  theme_light: "Світла", theme_dark: "Темна",
+  ht_question: "Як ви заробляєте?", ht_employment: "Найм", ht_freelancing: "Фріланс",
+  ht_best_matches: "Найкращі збіги для вас",
+  c_portugal: "Португалія", c_portugal_d: "Сильний збіг у 8 стовпах",
+  c_spain: "Іспанія", c_spain_d: "Високий баланс роботи та життя",
+  c_czech: "Чеська Республіка", c_czech_d: "Відмінне співвідношення витрат і доходу",
+  c_germany: "Німеччина", c_germany_d: "Найкраща охорона здоров'я та безпека",
+  c_netherlands: "Нідерланди", c_netherlands_d: "Сильна спільнота та робота",
+  ht_hint: 'Додайте більше про себе, щоб уточнити рейтинг. Чим більше Hek<em>ai</em> знає, тим точнішими стають ваші збіги.',
+  closing_quote: 'Як затемнення, що перетворює все, до чого торкається,<br>ми віримо, що <em>кожна людина, до якої ми дотягуємося</em>, несе далі<br>світло, що змінює світ навколо —<br>одне життя, одна фаза, один <em>великий перехід</em>.'
+}
+};
+
+// ===== LANGUAGE SWITCHING =====
+function setLang(lang) {
+  const strings = T[lang];
+  if (!strings) return;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (strings[key] != null) el.textContent = strings[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (strings[key] != null) el.innerHTML = strings[key];
+  });
+  document.documentElement.lang = lang;
+  try { localStorage.setItem('eclipsion-lang', lang); } catch(e) {}
+}
+
+// Restore saved language on load
+(function() {
+  try {
+    const saved = localStorage.getItem('eclipsion-lang');
+    if (saved && T[saved]) {
+      document.getElementById('langSelect').value = saved;
+      setLang(saved);
+    }
+  } catch(e) {}
+})();
+
 // Scroll reveal
 const obs = new IntersectionObserver(es => {
   es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') });
