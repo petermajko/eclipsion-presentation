@@ -83,7 +83,7 @@ body{font-family:'Didact Gothic',sans-serif;background:var(--black);color:var(--
 /* ===== TRANSITION TO HEKAI ===== */
 .transition-section{position:relative;padding:120px 20px;text-align:center;background:linear-gradient(180deg,var(--warm-black) 0%,#0a0e16 100%);overflow:hidden}
 .transition-glow{position:absolute;width:400px;height:400px;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(28,117,188,.06) 0%,transparent 70%)}
-.transition-text{position:relative;z-index:1;max-width:620px;margin:0 auto;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.2rem,2.4vw,1.65rem);line-height:2;color:rgba(255,255,255,.55)}
+.transition-text{position:relative;z-index:1;max-width:720px;margin:0 auto;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.2rem,2.4vw,1.65rem);line-height:2;color:rgba(255,255,255,.55)}
 .transition-text em{color:var(--orange)}
 .transition-text .blue{color:var(--blue)}
 .hekai-reveal{margin-top:50px;position:relative;z-index:1}
@@ -196,7 +196,7 @@ body{font-family:'Didact Gothic',sans-serif;background:var(--black);color:var(--
 .ht-countries{list-style:none}
 .ht-country{display:flex;align-items:center;padding:13px 14px;gap:12px;border-radius:10px;transition:all .3s;margin-bottom:2px}
 .ht-rank{font-size:.82rem;width:20px;text-align:center;font-weight:500;transition:color .5s}
-.ht-flag{font-size:1.25rem}
+.ht-flag img{width:24px;height:18px;border-radius:2px;display:block}
 .ht-info{flex:1}
 .ht-cname{font-size:.95rem;font-weight:500;transition:color .5s}
 .ht-cdetail{font-size:.74rem;margin-top:2px;transition:color .5s}
@@ -383,11 +383,11 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
       <p class="ht-label" data-i18n="ht_best_matches">Best matches for you</p>
       <ul class="ht-countries">
-        <li class="ht-country top"><span class="ht-rank">1</span><span class="ht-flag">&#127477;&#127481;</span><div class="ht-info"><div class="ht-cname" data-i18n="c_portugal">Portugal</div><div class="ht-cdetail" data-i18n="c_portugal_d">Strong match across 8 pillars</div></div><div class="ht-score-wrap"><span class="ht-score">92</span><div class="ht-bar-bg"><div class="ht-bar" style="width:92%"></div></div></div></li>
-        <li class="ht-country"><span class="ht-rank">2</span><span class="ht-flag">&#127466;&#127480;</span><div class="ht-info"><div class="ht-cname" data-i18n="c_spain">Spain</div><div class="ht-cdetail" data-i18n="c_spain_d">High on work-life balance</div></div><div class="ht-score-wrap"><span class="ht-score">87</span><div class="ht-bar-bg"><div class="ht-bar" style="width:87%"></div></div></div></li>
-        <li class="ht-country"><span class="ht-rank">3</span><span class="ht-flag">&#127464;&#127487;</span><div class="ht-info"><div class="ht-cname" data-i18n="c_czech">Czech Republic</div><div class="ht-cdetail" data-i18n="c_czech_d">Excellent cost-to-income ratio</div></div><div class="ht-score-wrap"><span class="ht-score">84</span><div class="ht-bar-bg"><div class="ht-bar" style="width:84%"></div></div></div></li>
-        <li class="ht-country"><span class="ht-rank">4</span><span class="ht-flag">&#127465;&#127466;</span><div class="ht-info"><div class="ht-cname" data-i18n="c_germany">Germany</div><div class="ht-cdetail" data-i18n="c_germany_d">Top healthcare & safety</div></div><div class="ht-score-wrap"><span class="ht-score">81</span><div class="ht-bar-bg"><div class="ht-bar" style="width:81%"></div></div></div></li>
-        <li class="ht-country"><span class="ht-rank">5</span><span class="ht-flag">&#127475;&#127473;</span><div class="ht-info"><div class="ht-cname" data-i18n="c_netherlands">Netherlands</div><div class="ht-cdetail" data-i18n="c_netherlands_d">Strong community & jobs</div></div><div class="ht-score-wrap"><span class="ht-score">78</span><div class="ht-bar-bg"><div class="ht-bar" style="width:78%"></div></div></div></li>
+        <li class="ht-country top"><span class="ht-rank">1</span><span class="ht-flag"><img src="https://flagcdn.com/24x18/pt.png" alt="PT"></span><div class="ht-info"><div class="ht-cname" data-i18n="c_portugal">Portugal</div><div class="ht-cdetail" data-i18n="c_portugal_d">Strong match across 8 pillars</div></div><div class="ht-score-wrap"><span class="ht-score">92</span><div class="ht-bar-bg"><div class="ht-bar" style="width:92%"></div></div></div></li>
+        <li class="ht-country"><span class="ht-rank">2</span><span class="ht-flag"><img src="https://flagcdn.com/24x18/es.png" alt="ES"></span><div class="ht-info"><div class="ht-cname" data-i18n="c_spain">Spain</div><div class="ht-cdetail" data-i18n="c_spain_d">High on work-life balance</div></div><div class="ht-score-wrap"><span class="ht-score">87</span><div class="ht-bar-bg"><div class="ht-bar" style="width:87%"></div></div></div></li>
+        <li class="ht-country"><span class="ht-rank">3</span><span class="ht-flag"><img src="https://flagcdn.com/24x18/cz.png" alt="CZ"></span><div class="ht-info"><div class="ht-cname" data-i18n="c_czech">Czech Republic</div><div class="ht-cdetail" data-i18n="c_czech_d">Excellent cost-to-income ratio</div></div><div class="ht-score-wrap"><span class="ht-score">84</span><div class="ht-bar-bg"><div class="ht-bar" style="width:84%"></div></div></div></li>
+        <li class="ht-country"><span class="ht-rank">4</span><span class="ht-flag"><img src="https://flagcdn.com/24x18/de.png" alt="DE"></span><div class="ht-info"><div class="ht-cname" data-i18n="c_germany">Germany</div><div class="ht-cdetail" data-i18n="c_germany_d">Top healthcare & safety</div></div><div class="ht-score-wrap"><span class="ht-score">81</span><div class="ht-bar-bg"><div class="ht-bar" style="width:81%"></div></div></div></li>
+        <li class="ht-country"><span class="ht-rank">5</span><span class="ht-flag"><img src="https://flagcdn.com/24x18/nl.png" alt="NL"></span><div class="ht-info"><div class="ht-cname" data-i18n="c_netherlands">Netherlands</div><div class="ht-cdetail" data-i18n="c_netherlands_d">Strong community & jobs</div></div><div class="ht-score-wrap"><span class="ht-score">78</span><div class="ht-bar-bg"><div class="ht-bar" style="width:78%"></div></div></div></li>
       </ul>
       <div class="ht-hint">
         <span class="ht-hint-icon">&#9656;</span>
