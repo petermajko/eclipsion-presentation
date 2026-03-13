@@ -30,23 +30,26 @@
 
 ## Hekairos (ἡκαι + καιρος = Hecate + Kairos)
 
-**Hekairos** is the first product/brand under Eclipsion.
+**Hekairos** is the main product under Eclipsion — a unified life decision platform.
 
-It's a tool that helps with life decisions — from the presentation, it appears to be a country/location recommendation tool that ranks countries based on personal criteria (similar to "best countries for [your needs]").
+It's modular — users enable the capabilities they need:
+- Life/country decisions (core)
+- Career matching (optional module)
+- Finance management (optional module)
 
-The tool shows:
+The current presentation shows the life/country ranking capability:
 - Country rankings with scores
 - Light/dark theme toggle
 - Multiple countries with details
 
-## Tekairos (τέχνη + καιρος = skill/craft + the right moment)
+## Modules (Capabilities)
 
+### Tekairos-style (Career Module)
 Career transition tool — helps you find the right moment for your career moves.
 
 Current state: Job Optimizer / Job Seeker project in development.
 
-## Oikairos (οἶκος + καιρος = household + the right moment)
-
+### Oikairos-style (Finance Module)
 Personal finance tool — helps with financial decisions at the right time.
 
 Planned features:
@@ -66,15 +69,15 @@ Planned features:
 ```
 Eclipsion (umbrella company/organization)
     │
-    ├── Hekairos (life decision tool) - from Hecate + Kairos
-    │       └── hekai.app (website)
-    │
-    ├── Tekairos (career transition tool) - from Tekne + Kairos
-    │       └── (Job Optimizer / Job Seeker)
-    │
-    ├── Oikairos (personal finance tool) - from Oikos + Kairos
-    │
-    └── [More projects to come...]
+    └── Hekairos (unified life decision platform)
+            └── hekai.app (website)
+
+    The app has modular capabilities:
+    ├── Core: Life decisions (relocation, major changes)
+    ├── Module: Career (Tekairos-style job matching)
+    └── Module: Finance (Oikairos-style money management)
+
+    Users enable the modules they need.
 ```
 
 ---
