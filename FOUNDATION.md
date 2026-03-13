@@ -51,6 +51,8 @@ Eclipsion (umbrella company/organization)
     │
     ├── Job Seeker / Job Optimizer (career transition tool)
     │
+    ├── Personal Finance (money management & transitions)
+    │
     └── [More projects to come...]
 ```
 
