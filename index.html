@@ -4,287 +4,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eclipsion & Hekairōs</title>
+<link rel="stylesheet" href="css/styles.css">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Didact+Gothic&family=Outfit:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--orange:#FF6600;--dark-orange:#C95100;--accent:#F7924D;--blue:#1C75BC;--black:#000;--white:#FFF;--warm-black:#0c0a08}
-html{scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:'Didact Gothic',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
-
-/* ===== HERO ===== */
-.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--black);overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 40%,rgba(255,102,0,.06) 0%,transparent 70%),radial-gradient(ellipse 60% 40% at 50% 50%,rgba(201,81,0,.04) 0%,transparent 60%)}
-.eclipse-container{position:relative;width:200px;height:200px;margin-bottom:45px;animation:fadeIn 2s ease-out both}
-.eclipse-sun{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#FF6600 0%,#C95100 40%,rgba(201,81,0,0) 70%);box-shadow:0 0 60px rgba(255,102,0,.4),0 0 120px rgba(255,102,0,.15);animation:sunPulse 6s ease-in-out infinite}
-.eclipse-moon{position:absolute;width:182px;height:182px;top:9px;left:9px;border-radius:50%;background:var(--black);box-shadow:0 0 30px rgba(0,0,0,.8);animation:moonDrift 20s ease-in-out infinite}
-.corona-ring{position:absolute;border-radius:50%;border:1px solid rgba(255,102,0,.15);animation:coronaPulse 4s ease-in-out infinite}
-.corona-ring:nth-child(1){inset:-18px}
-.corona-ring:nth-child(2){inset:-38px;border-color:rgba(247,146,77,.08);animation-delay:1s}
-.corona-ring:nth-child(3){inset:-60px;border-color:rgba(255,102,0,.04);animation-delay:2s}
-.diamond-flare{position:absolute;top:16px;right:20px;width:10px;height:10px;background:var(--white);border-radius:50%;box-shadow:0 0 12px var(--white),0 0 25px var(--accent),0 0 50px var(--orange);animation:flarePulse 4s ease-in-out infinite}
-.hero-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2.2rem,5.2vw,4rem);letter-spacing:.35em;text-transform:uppercase;color:var(--orange);animation:fadeIn 2s ease-out .5s both;text-align:center}
-.hero-motto{font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(1.05rem,2.7vw,1.55rem);letter-spacing:.25em;color:rgba(255,255,255,.55);margin-top:14px;animation:fadeIn 2s ease-out 1s both;text-align:center}
-.hero-scroll{position:absolute;bottom:35px;display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeIn 2s ease-out 1.8s both;cursor:pointer;text-decoration:none}
-.hero-scroll span{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.25)}
-.scroll-line{width:1px;height:35px;background:linear-gradient(to bottom,rgba(255,102,0,.5),transparent);animation:scrollPulse 2s ease-in-out infinite}
-
-/* ===== SHARED SECTION STYLES ===== */
-.section-dark{position:relative;padding:100px 20px;text-align:center}
-.section-dark.bg-warm{background:linear-gradient(180deg,var(--black),var(--warm-black))}
-.section-dark.bg-warm2{background:var(--warm-black)}
-.section-dark.bg-fade{background:linear-gradient(180deg,var(--warm-black),var(--black))}
-.reveal{opacity:0;transform:translateY(30px);transition:all 1.2s ease-out}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.divider{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--orange),transparent);margin:45px auto 0;opacity:0;transition:opacity 1.5s ease-out .5s}
-.divider.visible{opacity:1}
-
-/* ===== INTRO ===== */
-.intro-text{max-width:720px;margin:0 auto;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.2rem,2.4vw,1.65rem);line-height:2;color:rgba(255,255,255,.65)}
-.intro-text em{color:var(--orange);font-style:italic}
-
-/* ===== WHAT WE DO ===== */
-.what-headline{max-width:800px;margin:0 auto 55px;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(1.55rem,3.2vw,2.3rem);line-height:1.6;color:var(--white)}
-.what-headline em{color:var(--orange);font-style:normal}
-.what-grid{max-width:880px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
-.what-item{text-align:center;padding:25px 18px}
-.what-icon{font-size:1.5rem;margin-bottom:16px;opacity:.8}
-.what-item-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.15rem;letter-spacing:.08em;color:var(--orange);margin-bottom:10px}
-.what-item-desc{font-size:.92rem;line-height:1.8;color:rgba(255,255,255,.45)}
-.what-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;max-width:650px;margin:0 auto}
-.what-tag{padding:6px 16px;border:1px solid rgba(255,102,0,.12);border-radius:2px;font-size:.82rem;letter-spacing:.04em;color:rgba(255,255,255,.4);background:rgba(255,102,0,.02)}
-.what-bridge{max-width:600px;margin:60px auto 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(1.05rem,2vw,1.25rem);line-height:1.9;color:rgba(255,255,255,.45)}
-.what-bridge em{color:var(--accent)}
-.small-label{font-size:.75rem;letter-spacing:.35em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
-
-/* ===== PHASES ===== */
-.phases-header{text-align:center;margin-bottom:80px}
-.phases-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.85rem,4.2vw,3rem);letter-spacing:.15em;color:var(--white)}
-.three-phases{max-width:1050px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;align-items:stretch}
-.phase-card{border:1px solid rgba(255,102,0,.1);border-radius:2px;padding:45px 30px 40px;background:rgba(255,102,0,.015);position:relative;overflow:hidden}
-.phase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--orange),transparent);opacity:.4}
-.phase-card.center-phase{border-color:rgba(255,102,0,.2);background:rgba(255,102,0,.03)}
-.phase-card.center-phase::before{opacity:1;background:linear-gradient(to right,transparent,var(--orange),var(--accent),var(--orange),transparent)}
-.phase-card-eclipse{display:flex;justify-content:center;margin-bottom:25px}
-.mini-eclipse{position:relative;width:70px;height:70px}
-.mini-sun{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,var(--orange) 0%,var(--dark-orange) 50%,transparent 70%);box-shadow:0 0 22px rgba(255,102,0,.3)}
-.mini-moon{position:absolute;width:65px;height:65px;border-radius:50%;background:var(--warm-black);box-shadow:inset 0 0 8px rgba(10,8,6,1)}
-.eclipse-before .mini-moon{top:2px;left:48px}
-.eclipse-during .mini-moon{top:2px;left:2px}
-.eclipse-during .mini-sun{box-shadow:0 0 30px rgba(255,102,0,.5),0 0 60px rgba(255,102,0,.2)}
-.eclipse-during .mini-corona{position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(255,102,0,.2);animation:coronaPulse 3s ease-in-out infinite}
-.eclipse-after .mini-moon{top:2px;left:-40px}
-.eclipse-after .mini-sun{box-shadow:0 0 25px rgba(255,102,0,.4),0 0 65px rgba(247,146,77,.15)}
-.phase-card-number{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:.82rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,102,0,.35);margin-bottom:8px}
-.phase-card-name{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(1.3rem,2.2vw,1.7rem);letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:5px}
-.phase-card-subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1rem;color:var(--accent);margin-bottom:18px;letter-spacing:.03em}
-.phase-card-desc{font-size:.94rem;line-height:1.85;color:rgba(255,255,255,.45)}
-.phase-card-desc strong{color:rgba(255,255,255,.7);font-weight:400}
-
-/* ===== TRANSITION TO HEKAI ===== */
-.transition-section{position:relative;padding:120px 20px;text-align:center;background:linear-gradient(180deg,var(--warm-black) 0%,#0a0e16 100%);overflow:hidden}
-.transition-glow{position:absolute;width:400px;height:400px;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(28,117,188,.06) 0%,transparent 70%)}
-.transition-text{position:relative;z-index:1;max-width:720px;margin:0 auto;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.2rem,2.4vw,1.65rem);line-height:2;color:rgba(255,255,255,.55)}
-.transition-text em{color:var(--orange)}
-.transition-text .blue{color:var(--blue)}
-.hekai-reveal{margin-top:50px;position:relative;z-index:1}
-.hekai-formal{font-family:'Outfit',sans-serif;font-weight:300;font-size:.88rem;letter-spacing:.2em;color:rgba(255,255,255,.25);margin-bottom:6px}
-.hekai-formal em{font-style:normal;color:rgba(255,102,0,.4)}
-.hekai-name{font-family:'Outfit',sans-serif;font-weight:500;font-size:clamp(2.2rem,5vw,3.5rem);color:var(--white);letter-spacing:.06em}
-.hekai-name em{font-style:normal;color:var(--orange)}
-.hekai-tagline{font-size:.94rem;color:rgba(255,255,255,.35);margin-top:8px;letter-spacing:.08em}
-.hekai-meaning{margin-top:30px;display:flex;justify-content:center;gap:35px;flex-wrap:wrap}
-.hekai-meaning-item{text-align:center}
-.hekai-meaning-label{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:4px}
-.hekai-meaning-value{font-size:.9rem;color:rgba(255,255,255,.45)}
-.hekai-meaning-value em{font-style:normal;color:var(--orange)}
-.hekai-meaning-value .greek{font-style:italic;color:rgba(255,255,255,.3)}
-
-/* ===== HEKAI TOOL SECTION ===== */
-.hekai-section{position:relative;padding:80px 20px 120px;background:#0a0e16;overflow:hidden}
-.hekai-section-header{text-align:center;margin-bottom:50px}
-.hekai-section-title{font-family:'Outfit',sans-serif;font-weight:300;font-size:1.2rem;color:rgba(255,255,255,.4);letter-spacing:.12em}
-.hekai-section-title em{font-style:normal;color:var(--orange)}
-
-/* Theme toggle button */
-.theme-switch-wrap{display:flex;justify-content:center;margin-bottom:40px;gap:14px;align-items:center}
-.theme-label{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);transition:color .3s}
-.theme-label.active-label{color:rgba(255,255,255,.6)}
-.theme-switch{width:48px;height:26px;border-radius:13px;background:#1B2535;border:1px solid rgba(28,117,188,.2);position:relative;cursor:pointer;transition:all .4s}
-.theme-switch .sw-dot{width:18px;height:18px;border-radius:50%;position:absolute;top:3px;left:3px;background:var(--blue);transition:all .4s;box-shadow:0 2px 6px rgba(0,0,0,.3)}
-.theme-switch.is-dark .sw-dot{left:25px;background:var(--orange)}
-
-/* The mock container */
-.hekai-mock-wrap{max-width:520px;margin:0 auto;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:all .5s}
-
-/* HEKAI TOOL — uses data-theme attribute */
-.hekai-tool{font-family:'DM Sans',sans-serif;padding:36px 32px;min-height:580px;position:relative;overflow:hidden;transition:background .5s,color .5s}
-.hekai-tool::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;pointer-events:none;transition:background .5s}
-
-/* Light theme */
-.hekai-tool[data-theme="light"]{background:#FAFBFE}
-.hekai-tool[data-theme="light"]::before{background:radial-gradient(circle,rgba(28,117,188,.04) 0%,transparent 70%)}
-.hekai-tool[data-theme="light"] .ht-eclipsion{color:#1C75BC;opacity:.6}
-.hekai-tool[data-theme="light"] .ht-name{color:#15253A}
-.hekai-tool[data-theme="light"] .ht-tagline{color:#8A9AB5}
-.hekai-tool[data-theme="light"] .ht-sep{background:linear-gradient(to right,#1C75BC,transparent);opacity:.1}
-.hekai-tool[data-theme="light"] .ht-question{color:#4A6178}
-.hekai-tool[data-theme="light"] .ht-label{color:#1C75BC;opacity:.5}
-.hekai-tool[data-theme="light"] .ht-toggle-bar{background:#EEF2F8}
-.hekai-tool[data-theme="light"] .ht-toggle-opt{color:#7088A2}
-.hekai-tool[data-theme="light"] .ht-toggle-opt.active{background:#fff;color:#15253A;box-shadow:0 2px 10px rgba(28,117,188,.1);font-weight:500}
-.hekai-tool[data-theme="light"] .ht-country{border-bottom:1px solid #EEF2F8}
-.hekai-tool[data-theme="light"] .ht-country:hover{background:#F4F7FC}
-.hekai-tool[data-theme="light"] .ht-country.top{background:linear-gradient(135deg,rgba(28,117,188,.05),rgba(255,102,0,.03));border:1px solid rgba(28,117,188,.1)}
-.hekai-tool[data-theme="light"] .ht-rank{color:#B8C8D8}
-.hekai-tool[data-theme="light"] .ht-country.top .ht-rank{color:#1C75BC;font-weight:600}
-.hekai-tool[data-theme="light"] .ht-cname{color:#15253A}
-.hekai-tool[data-theme="light"] .ht-cdetail{color:#9AABBF}
-.hekai-tool[data-theme="light"] .ht-country.top .ht-score{color:#FF6600}
-.hekai-tool[data-theme="light"] .ht-country:not(.top) .ht-score{color:#1C75BC}
-.hekai-tool[data-theme="light"] .ht-bar-bg{background:#EEF2F8}
-.hekai-tool[data-theme="light"] .ht-country.top .ht-bar{background:linear-gradient(to right,#FF6600,#F7924D)}
-.hekai-tool[data-theme="light"] .ht-country:not(.top) .ht-bar{background:#1C75BC}
-.hekai-tool[data-theme="light"] .ht-hint{background:#EFF3FA;border:1px solid #E4EAF2}
-.hekai-tool[data-theme="light"] .ht-hint-icon{color:#1C75BC}
-.hekai-tool[data-theme="light"] .ht-hint-text{color:#6B829C}
-
-/* Dark theme */
-.hekai-tool[data-theme="dark"]{background:#141B27}
-.hekai-tool[data-theme="dark"]::before{background:radial-gradient(circle,rgba(28,117,188,.06) 0%,transparent 70%)}
-.hekai-tool[data-theme="dark"] .ht-eclipsion{color:#4A9AD4;opacity:.6}
-.hekai-tool[data-theme="dark"] .ht-name{color:#E4EAF2}
-.hekai-tool[data-theme="dark"] .ht-tagline{color:#506880}
-.hekai-tool[data-theme="dark"] .ht-sep{background:linear-gradient(to right,#4A9AD4,transparent);opacity:.12}
-.hekai-tool[data-theme="dark"] .ht-question{color:#6B8AAB}
-.hekai-tool[data-theme="dark"] .ht-label{color:#4A9AD4;opacity:.5}
-.hekai-tool[data-theme="dark"] .ht-toggle-bar{background:#1B2535}
-.hekai-tool[data-theme="dark"] .ht-toggle-opt{color:#506880}
-.hekai-tool[data-theme="dark"] .ht-toggle-opt.active{background:#243347;color:#E4EAF2;box-shadow:0 2px 10px rgba(0,0,0,.25);font-weight:500}
-.hekai-tool[data-theme="dark"] .ht-country{border-bottom:1px solid #1B2535}
-.hekai-tool[data-theme="dark"] .ht-country:hover{background:#19222F}
-.hekai-tool[data-theme="dark"] .ht-country.top{background:linear-gradient(135deg,rgba(28,117,188,.08),rgba(255,102,0,.04));border:1px solid rgba(28,117,188,.15)}
-.hekai-tool[data-theme="dark"] .ht-rank{color:#2E4560}
-.hekai-tool[data-theme="dark"] .ht-country.top .ht-rank{color:#4A9AD4;font-weight:600}
-.hekai-tool[data-theme="dark"] .ht-cname{color:#C8D6E5}
-.hekai-tool[data-theme="dark"] .ht-cdetail{color:#3E5A75}
-.hekai-tool[data-theme="dark"] .ht-country.top .ht-score{color:#FF6600}
-.hekai-tool[data-theme="dark"] .ht-country:not(.top) .ht-score{color:#4A9AD4}
-.hekai-tool[data-theme="dark"] .ht-bar-bg{background:#1B2535}
-.hekai-tool[data-theme="dark"] .ht-country.top .ht-bar{background:linear-gradient(to right,#FF6600,#F7924D)}
-.hekai-tool[data-theme="dark"] .ht-country:not(.top) .ht-bar{background:#4A9AD4}
-.hekai-tool[data-theme="dark"] .ht-hint{background:#1A2333;border:1px solid #1E2D40}
-.hekai-tool[data-theme="dark"] .ht-hint-icon{color:#4A9AD4}
-.hekai-tool[data-theme="dark"] .ht-hint-text{color:#506880}
-
-/* Opacity fade for lower-ranked items */
-.ht-country:nth-child(3) .ht-score,.ht-country:nth-child(3) .ht-bar{opacity:.8}
-.ht-country:nth-child(4) .ht-score,.ht-country:nth-child(4) .ht-bar{opacity:.6}
-.ht-country:nth-child(5) .ht-score,.ht-country:nth-child(5) .ht-bar{opacity:.45}
-
-/* Hekai tool inner elements */
-.ht-header{margin-bottom:28px;display:flex;align-items:flex-start;justify-content:space-between}
-.ht-eclipsion{font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;margin-bottom:5px;transition:color .5s}
-.ht-name{font-family:'Outfit',sans-serif;font-weight:500;font-size:1.65rem;letter-spacing:.02em;transition:color .5s}
-.ht-name em{font-style:normal;color:#FF6600}
-.ht-tagline{font-size:.84rem;margin-top:5px;transition:color .5s}
-.ht-sep{height:1px;margin:0 0 24px;transition:background .5s,opacity .5s}
-.ht-question{font-size:.9rem;margin-bottom:14px;transition:color .5s}
-.ht-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px;font-weight:500;transition:color .5s}
-.ht-toggle-bar{display:flex;border-radius:10px;padding:4px;margin-bottom:24px;transition:background .5s}
-.ht-toggle-opt{flex:1;padding:12px;text-align:center;border-radius:8px;font-size:.9rem;cursor:pointer;transition:all .3s;background:transparent;border:none;position:relative;font-family:'DM Sans',sans-serif}
-.ht-toggle-opt.active::after{content:'';position:absolute;bottom:5px;left:50%;transform:translateX(-50%);width:20px;height:2px;background:#FF6600;border-radius:2px}
-.ht-countries{list-style:none}
-.ht-country{display:flex;align-items:center;padding:13px 14px;gap:12px;border-radius:10px;transition:all .3s;margin-bottom:2px}
-.ht-rank{font-size:.82rem;width:20px;text-align:center;font-weight:500;transition:color .5s}
-.ht-flag img{width:24px;height:18px;border-radius:2px;display:block}
-.ht-info{flex:1}
-.ht-cname{font-size:.95rem;font-weight:500;transition:color .5s}
-.ht-cdetail{font-size:.74rem;margin-top:2px;transition:color .5s}
-.ht-score-wrap{display:flex;align-items:center;gap:8px}
-.ht-score{font-size:.9rem;font-weight:600;transition:color .5s}
-.ht-bar-bg{width:46px;height:4px;border-radius:4px;overflow:hidden;transition:background .5s}
-.ht-bar{height:100%;border-radius:4px;transition:background .5s}
-.ht-hint{margin-top:22px;padding:13px 16px;border-radius:10px;display:flex;align-items:center;gap:10px;transition:all .5s}
-.ht-hint-icon{flex-shrink:0;font-size:.85rem;transition:color .5s}
-.ht-hint-text{font-size:.8rem;line-height:1.6;transition:color .5s}
-.ht-hint-text em{font-style:normal;color:#FF6600}
-
-/* ===== CLOSING ===== */
-.closing{position:relative;padding:100px 20px 70px;text-align:center;background:linear-gradient(180deg,#0a0e16,var(--black));overflow:hidden}
-.closing-glow{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(255,102,0,.05) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)}
-.closing-quote{position:relative;z-index:1;max-width:600px;margin:0 auto;font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(1.2rem,2.7vw,1.7rem);line-height:2;color:rgba(255,255,255,.55)}
-.closing-quote em{color:var(--orange)}
-.closing-line{width:40px;height:1px;background:var(--orange);margin:45px auto 25px}
-.closing-motto{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(.88rem,1.6vw,1.1rem);letter-spacing:.35em;text-transform:uppercase;color:rgba(255,255,255,.3)}
-
-footer{padding:35px 20px;text-align:center;background:var(--black);border-top:1px solid rgba(255,102,0,.06)}
-footer p{font-size:.75rem;letter-spacing:.18em;color:rgba(255,255,255,.18)}
-footer a{color:var(--orange);text-decoration:none;transition:opacity .3s}
-footer a:hover{opacity:.7}
-
-/* ===== ANIMATIONS ===== */
-@keyframes fadeIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-@keyframes sunPulse{0%,100%{box-shadow:0 0 60px rgba(255,102,0,.4),0 0 120px rgba(255,102,0,.15)}50%{box-shadow:0 0 80px rgba(255,102,0,.5),0 0 160px rgba(255,102,0,.2)}}
-@keyframes moonDrift{0%,100%{transform:translate(0,0)}25%{transform:translate(5px,-2px)}50%{transform:translate(8px,0)}75%{transform:translate(5px,2px)}}
-@keyframes coronaPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.05);opacity:.5}}
-@keyframes flarePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
-@keyframes scrollPulse{0%,100%{opacity:.3;height:35px}50%{opacity:.8;height:50px}}
-
-/* ===== RESPONSIVE ===== */
-@media(max-width:900px){.three-phases{grid-template-columns:1fr;max-width:480px;gap:35px}.what-grid{grid-template-columns:1fr;gap:12px}}
-@media(max-width:600px){.hekai-meaning{gap:18px}}
-
-/* ===== LANGUAGE SWITCHER ===== */
-.lang-wrap{position:fixed;top:18px;right:22px;z-index:10000;opacity:.45;transition:opacity .4s}
-.lang-wrap:hover{opacity:.85}
-.lang-select{appearance:none;-webkit-appearance:none;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);font-family:'Didact Gothic',sans-serif;font-size:.72rem;letter-spacing:.06em;padding:6px 26px 6px 10px;border-radius:3px;cursor:pointer;outline:none;transition:all .3s;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.lang-select:hover,.lang-select:focus{border-color:rgba(255,102,0,.2);color:rgba(255,255,255,.7)}
-.lang-select option{background:#1a1a1a;color:#ccc}
-.lang-arrow{position:absolute;right:8px;top:50%;transform:translateY(-50%);pointer-events:none;font-size:.5rem;color:rgba(255,255,255,.3)}
-
-body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.35}
-</style>
 </head>
 <body>
-
-<!-- Language switcher -->
-<div class="lang-wrap">
-  <select class="lang-select" id="langSelect" onchange="setLang(this.value)">
-    <option value="cs">Čeština</option>
-    <option value="de">Deutsch</option>
-    <option value="en" selected>English</option>
-    <option value="es">Español</option>
-    <option value="fr">Français</option>
-    <option value="pl">Polski</option>
-    <option value="pt">Português</option>
-    <option value="sk">Slovenčina</option>
-    <option value="uk">Українська</option>
-  </select>
-  <span class="lang-arrow">&#9662;</span>
-</div>
 
 <!-- ===== HERO ===== -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="eclipse-container">
-    <div class="corona-ring"></div><div class="corona-ring"></div><div class="corona-ring"></div>
-    <div class="eclipse-sun"></div><div class="eclipse-moon"></div><div class="diamond-flare"></div>
+    <div class="eclipse-sun"></div>
+    <div class="eclipse-moon"></div>
+    <div class="corona-ring"></div>
+    <div class="corona-ring"></div>
+    <div class="corona-ring"></div>
+    <div class="diamond-flare"></div>
   </div>
   <h1 class="hero-title">Eclipsion</h1>
-  <p class="hero-motto" data-i18n="hero_motto">For a better humanity</p>
-  <a href="#intro" class="hero-scroll"><span data-i18n="discover">Discover</span><div class="scroll-line"></div></a>
+  <p class="hero-motto">For a better humanity</p>
+  <a href="#intro" class="hero-scroll">
+    <span>Discover</span>
+    <div class="scroll-line"></div>
+  </a>
 </section>
 
 <!-- ===== INTRO ===== -->
-<section class="section-dark bg-warm" id="intro">
+<section id="intro" class="section-dark bg-warm">
   <p class="intro-text reveal" data-i18n-html="intro_text">
     Life is full of big changes — relocating to a new country, starting a business,
     navigating taxes in a new system, getting married, taking out a loan.<br><br>
-    <em>Eclipsion helps you understand what you're getting into.</em><br><br>
-    We provide precise calculations, clear information, and honest analysis of
-    trade-offs — so you can make the best decisions for your life.
-    When you need a specialist, we connect you with the right one.
-    And we stay with you long after everyone else is gone.
+    <em>Eclipsion helps you understand what you're getting into.</em>
   </p>
   <div class="divider reveal"></div>
 </section>
@@ -293,14 +42,30 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 <section class="section-dark bg-warm2">
   <h2 class="what-headline reveal" data-i18n-html="what_headline">When life changes, you deserve <em>clarity</em> — not guesswork</h2>
   <div class="what-grid">
-    <div class="what-item reveal"><div class="what-icon">&#9670;</div><p class="what-item-title" data-i18n="calc_title">Precise Calculations</p><p class="what-item-desc" data-i18n="calc_desc">Finances, cost of living, tax implications, loan comparisons — real numbers, not estimates. Data you can make decisions with.</p></div>
-    <div class="what-item reveal"><div class="what-icon">&#9671;</div><p class="what-item-title" data-i18n="trade_title">Clear Trade-Offs</p><p class="what-item-desc" data-i18n="trade_desc">Every big decision has pros and cons. We lay them out honestly so you see the full picture before you commit.</p></div>
-    <div class="what-item reveal"><div class="what-icon">&#9672;</div><p class="what-item-title" data-i18n="conn_title">Right Connections</p><p class="what-item-desc" data-i18n="conn_desc">When you need a lawyer, tax advisor, or specialist — we connect you with trusted professionals. No middlemen, no confusion.</p></div>
+    <div class="what-item reveal">
+      <div class="what-icon">&#9670;</div>
+      <p class="what-item-title" data-i18n="calc_title">Precise Calculations</p>
+      <p class="what-item-desc" data-i18n="calc_desc">Finances, cost of living, tax implications, loan comparisons — real numbers, not estimates.</p>
+    </div>
+    <div class="what-item reveal">
+      <div class="what-icon">&#9671;</div>
+      <p class="what-item-title" data-i18n="trade_title">Clear Trade-Offs</p>
+      <p class="what-item-desc" data-i18n="trade_desc">Every big decision has pros and cons. We lay them out honestly.</p>
+    </div>
+    <div class="what-item reveal">
+      <div class="what-icon">&#9672;</div>
+      <p class="what-item-title" data-i18n="conn_title">Right Connections</p>
+      <p class="what-item-desc" data-i18n="conn_desc">When you need a specialist — we connect you with trusted professionals.</p>
+    </div>
   </div>
   <div class="what-tags reveal" style="margin-top:45px">
-    <span class="what-tag" data-i18n="tag_reloc">Relocating abroad</span><span class="what-tag" data-i18n="tag_tax">Tax planning</span><span class="what-tag" data-i18n="tag_free">Freelancer setup</span><span class="what-tag" data-i18n="tag_loan">Loans & mortgages</span><span class="what-tag" data-i18n="tag_marry">Getting married</span><span class="what-tag" data-i18n="tag_cost">Cost of living analysis</span><span class="what-tag" data-i18n="tag_visa">Visa & residency</span><span class="what-tag" data-i18n="tag_biz">Starting a business</span>
+    <span class="what-tag" data-i18n="tag_reloc">Relocating abroad</span>
+    <span class="what-tag" data-i18n="tag_tax">Tax planning</span>
+    <span class="what-tag" data-i18n="tag_loan">Loans & mortgages</span>
+    <span class="what-tag" data-i18n="tag_cost">Cost of living</span>
+    <span class="what-tag" data-i18n="tag_visa">Visa & residency</span>
   </div>
-  <p class="what-bridge reveal" data-i18n-html="what_bridge">We structured our approach around the most powerful transformation in nature — <em>the eclipse</em>. Three phases. From preparation to crossing to life-long support.</p>
+  <p class="what-bridge reveal" data-i18n-html="what_bridge">Three phases. From preparation to crossing to life-long support.</p>
   <div class="divider reveal"></div>
 </section>
 
@@ -316,450 +81,187 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <p class="phase-card-number" data-i18n="phase1_num">Phase I</p>
       <h3 class="phase-card-name" data-i18n="phase1_name">Before the Eclipse</h3>
       <p class="phase-card-subtitle" data-i18n="phase1_sub">Discovery & Preparation</p>
-      <p class="phase-card-desc" data-i18n-html="phase1_desc">We begin where most don't — <strong>before the journey starts</strong>. Listening. Understanding who you are, what you carry, where you need to go. Mapping pathways with precision, assessing risk, calculating what lies ahead.</p>
+      <p class="phase-card-desc" data-i18n-html="phase1_desc">We begin where most don't — before the journey starts.</p>
     </div>
     <div class="phase-card center-phase reveal">
       <div class="phase-card-eclipse"><div class="mini-eclipse eclipse-during"><div class="mini-corona"></div><div class="mini-sun"></div><div class="mini-moon"></div></div></div>
       <p class="phase-card-number" data-i18n="phase2_num">Phase II</p>
       <h3 class="phase-card-name" data-i18n="phase2_name">The Eclipse</h3>
       <p class="phase-card-subtitle" data-i18n="phase2_sub">The Great Crossing</p>
-      <p class="phase-card-desc" data-i18n-html="phase2_desc">The transformation itself — <strong>when everything changes</strong>. We are present through every stage of the crossing, from the first step to the moment you arrive on the other side.</p>
+      <p class="phase-card-desc" data-i18n-html="phase2_desc">The transformation itself — when everything changes.</p>
     </div>
     <div class="phase-card reveal">
       <div class="phase-card-eclipse"><div class="mini-eclipse eclipse-after"><div class="mini-sun"></div><div class="mini-moon"></div></div></div>
       <p class="phase-card-number" data-i18n="phase3_num">Phase III</p>
       <h3 class="phase-card-name" data-i18n="phase3_name">After the Eclipse</h3>
       <p class="phase-card-subtitle" data-i18n="phase3_sub">Life-Long Continuity</p>
-      <p class="phase-card-desc" data-i18n-html="phase3_desc">Where others stop, <strong>we continue</strong>. Integration, growth, community, and a relationship that evolves with you. After the last contact, there is no goodbye — only a new chapter.</p>
+      <p class="phase-card-desc" data-i18n-html="phase3_desc">Where others stop, we continue.</p>
     </div>
   </div>
 </section>
 
-<!-- ===== TRANSITION TO HEKAI ===== -->
+<!-- ===== TRANSITION TO HEKAIROS ===== -->
 <section class="transition-section">
   <div class="transition-glow"></div>
   <p class="transition-text reveal" data-i18n-html="transition_text">
-    Our first tool brings <em>Phase I</em> to life.<br><br>
-    A companion that helps you see which countries match your life —<br>
-    with precise data, honest trade-offs, and a ranking that evolves<br>
-    as you share more about who you are and where you want to go.
+    One platform. Three capabilities.
   </p>
-  <div class="hekai-reveal reveal">
-    <p class="hekai-formal">Hek<em>ai</em>rōs</p>
-    <h2 class="hekai-name">Hek<em>ai</em></h2>
-    <p class="hekai-tagline" data-i18n="hekai_tagline">Find where your life works best</p>
-    <div class="hekai-meaning">
-      <div class="hekai-meaning-item"><p class="hekai-meaning-label" data-i18n="roots">Roots</p><p class="hekai-meaning-value"><span class="greek">ἑκατός</span> + <span class="greek">καιρός</span></p></div>
-      <div class="hekai-meaning-item"><p class="hekai-meaning-label" data-i18n="meaning">Meaning</p><p class="hekai-meaning-value" data-i18n="far_reaching">The far-reaching moment</p></div>
-      <div class="hekai-meaning-item"><p class="hekai-meaning-label" data-i18n="assistant">Assistant</p><p class="hekai-meaning-value">K<em>ai</em></p></div>
+  <div class="hekai-reveal">
+    <p class="hekai-formal reveal">INTRODUCING</p>
+    <h2 class="hekai-name reveal">Hekairos</h2>
+    <p class="hekai-tagline reveal" data-i18n="hekai_tagline">Find where your life works best</p>
+    <div class="hekai-meaning reveal">
+      <div class="hekai-meaning-item">
+        <p class="hekai-meaning-label" data-i18n="roots">Roots</p>
+        <p class="hekai-meaning-value">Ἑκάτη</p>
+      </div>
+      <div class="hekai-meaning-item">
+        <p class="hekai-meaning-label" data-i18n="meaning">Meaning</p>
+        <p class="hekai-meaning-value em">+</p>
+      </div>
+      <div class="hekai-meaning-item">
+        <p class="hekai-meaning-label" data-i18n="far_reaching">Opportunity</p>
+        <p class="hekai-meaning-value greek">Καιρός</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ===== HEKAI TOOL ===== -->
+<!-- ===== CAPABILITIES MODULES ===== -->
+<section class="section-dark bg-warm2">
+  <h2 class="what-headline reveal">Three Capabilities.<br>One Platform.</h2>
+  
+  <!-- Module 1: Life/Location -->
+  <div class="phase-card reveal" style="max-width:600px;margin:40px auto">
+    <div class="phase-card-eclipse"><div class="mini-eclipse eclipse-during"><div class="mini-corona"></div><div class="mini-sun"></div><div class="mini-moon"></div></div></div>
+    <p class="phase-card-number">MODULE 1</p>
+    <h3 class="phase-card-name">Life Decisions</h3>
+    <p class="phase-card-subtitle">Country & Relocation</p>
+    <p class="phase-card-desc">Find the country that matches your life — income, lifestyle, family, future. Data-driven rankings that evolve as you share more about who you are.</p>
+  </div>
+  
+  <!-- Module 2: Career -->
+  <div class="phase-card reveal" style="max-width:600px;margin:40px auto">
+    <div class="phase-card-eclipse"><div class="mini-eclipse eclipse-before"><div class="mini-sun"></div><div class="mini-moon"></div></div></div>
+    <p class="phase-card-number">MODULE 2</p>
+    <h3 class="phase-card-name">Career</h3>
+    <p class="phase-card-subtitle">Job Matching & Growth</p>
+    <p class="phase-card-desc">Match your skills to opportunities. Track applications, optimize for salary, find the right moment to make your next move.</p>
+  </div>
+  
+  <!-- Module 3: Finance -->
+  <div class="phase-card reveal" style="max-width:600px;margin:40px auto">
+    <div class="phase-card-eclipse"><div class="mini-eclipse eclipse-after"><div class="mini-sun"></div><div class="mini-moon"></div></div></div>
+    <p class="phase-card-number">MODULE 3</p>
+    <h3 class="phase-card-name">Finance</h3>
+    <p class="phase-card-subtitle">Personal Money Management</p>
+    <p class="phase-card-desc">Track income, expenses, loans, subscriptions. See where your money goes, plan for the future, optimize what you can cancel.</p>
+  </div>
+  
+  <p class="what-bridge reveal" style="margin-top:60px">Use what you need. Build from there.</p>
+  <div class="divider reveal"></div>
+</section>
+
+<!-- ===== HEAKAIROS DEMO ===== -->
 <section class="hekai-section">
   <div class="hekai-section-header">
-    <p class="hekai-section-title reveal" data-i18n-html="hekai_action">Hek<em>ai</em> in action</p>
+    <p class="hekai-section-title reveal" data-i18n="hekai_action">Hek<em>ai</em> in action</p>
   </div>
+  
+  <!-- Theme Toggle -->
   <div class="theme-switch-wrap reveal">
     <span class="theme-label active-label" id="lbl-light" data-i18n="theme_light">Light</span>
-    <div class="theme-switch" id="themeSwitch" onclick="toggleTheme()"><div class="sw-dot"></div></div>
+    <div class="theme-switch" id="themeSwitch" onclick="toggleTheme()">
+      <div class="sw-dot"></div>
+    </div>
     <span class="theme-label" id="lbl-dark" data-i18n="theme_dark">Dark</span>
   </div>
+  
+  <!-- Tool Mockup -->
   <div class="hekai-mock-wrap reveal">
-    <div class="hekai-tool" data-theme="light" id="hekaiTool">
+    <div class="hekai-tool" id="hekaiTool" data-theme="dark">
       <div class="ht-header">
         <div>
-          <div class="ht-eclipsion">Eclipsion</div>
-          <div class="ht-name">Hek<em>ai</em></div>
-          <div class="ht-tagline" data-i18n="hekai_tagline">Find where your life works best</div>
+          <p class="ht-eclipsion">HEKAIROS</p>
+          <h3 class="ht-name">Find your place</h3>
+          <p class="ht-tagline">Personalized country rankings</p>
         </div>
       </div>
       <div class="ht-sep"></div>
+      
       <p class="ht-question" data-i18n="ht_question">How do you earn your income?</p>
       <div class="ht-toggle-bar">
-        <div class="ht-toggle-opt active" onclick="setToggle(this)" data-i18n="ht_employment">Employment</div>
-        <div class="ht-toggle-opt" onclick="setToggle(this)" data-i18n="ht_freelancing">Freelancing</div>
+        <button class="ht-toggle-opt active" onclick="setToggle(this)" data-i18n="ht_employment">Employment</button>
+        <button class="ht-toggle-opt" onclick="setToggle(this)" data-i18n="ht_freelancing">Freelancing</button>
       </div>
+      
       <p class="ht-label" data-i18n="ht_best_matches">Best matches for you</p>
       <ul class="ht-countries">
-        <li class="ht-country top"><span class="ht-rank">1</span><span class="ht-flag"><img src="https://flagcdn.com/24x18/pt.png" alt="PT"></span><div class="ht-info"><div class="ht-cname" data-i18n="c_portugal">Portugal</div><div class="ht-cdetail" data-i18n="c_portugal_d">Strong match across 8 pillars</div></div><div class="ht-score-wrap"><span class="ht-score">92</span><div class="ht-bar-bg"><div class="ht-bar" style="width:92%"></div></div></div></li>
-        <li class="ht-country"><span class="ht-rank">2</span><span class="ht-flag"><img src="https://flagcdn.com/24x18/es.png" alt="ES"></span><div class="ht-info"><div class="ht-cname" data-i18n="c_spain">Spain</div><div class="ht-cdetail" data-i18n="c_spain_d">High on work-life balance</div></div><div class="ht-score-wrap"><span class="ht-score">87</span><div class="ht-bar-bg"><div class="ht-bar" style="width:87%"></div></div></div></li>
-        <li class="ht-country"><span class="ht-rank">3</span><span class="ht-flag"><img src="https://flagcdn.com/24x18/cz.png" alt="CZ"></span><div class="ht-info"><div class="ht-cname" data-i18n="c_czech">Czech Republic</div><div class="ht-cdetail" data-i18n="c_czech_d">Excellent cost-to-income ratio</div></div><div class="ht-score-wrap"><span class="ht-score">84</span><div class="ht-bar-bg"><div class="ht-bar" style="width:84%"></div></div></div></li>
-        <li class="ht-country"><span class="ht-rank">4</span><span class="ht-flag"><img src="https://flagcdn.com/24x18/de.png" alt="DE"></span><div class="ht-info"><div class="ht-cname" data-i18n="c_germany">Germany</div><div class="ht-cdetail" data-i18n="c_germany_d">Top healthcare & safety</div></div><div class="ht-score-wrap"><span class="ht-score">81</span><div class="ht-bar-bg"><div class="ht-bar" style="width:81%"></div></div></div></li>
-        <li class="ht-country"><span class="ht-rank">5</span><span class="ht-flag"><img src="https://flagcdn.com/24x18/nl.png" alt="NL"></span><div class="ht-info"><div class="ht-cname" data-i18n="c_netherlands">Netherlands</div><div class="ht-cdetail" data-i18n="c_netherlands_d">Strong community & jobs</div></div><div class="ht-score-wrap"><span class="ht-score">78</span><div class="ht-bar-bg"><div class="ht-bar" style="width:78%"></div></div></div></li>
+        <li class="ht-country top">
+          <span class="ht-rank">1</span>
+          <div class="ht-flag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect fill='%230060C9' width='3' height='2'/%3E%3Crect fill='white' width='2' height='2'/%3E%3Crect fill='%23D7141A' width='1' height='2'/%3E%3C/svg%3E" alt="PT"/></div>
+          <div class="ht-info">
+            <p class="ht-cname">Portugal</p>
+            <p class="ht-cdetail" data-i18n="c_portugal_d">Strong match across 8 pillars</p>
+          </div>
+          <span class="ht-score">94</span>
+          <div class="ht-bar-bg"><div class="ht-bar" style="width:94%"></div></div>
+        </li>
+        <li class="ht-country">
+          <span class="ht-rank">2</span>
+          <div class="ht-flag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect fill='%23AA151B' width='3' height='2'/%3E%3Crect fill='%23F1BF00' width='3' height='1'/%3E%3Crect fill='%23AA151B' width='3' height='.4'/%3E%3C/svg%3E" alt="ES"/></div>
+          <div class="ht-info">
+            <p class="ht-cname">Spain</p>
+            <p class="ht-cdetail" data-i18n="c_spain_d">High on work-life balance</p>
+          </div>
+          <span class="ht-score">87</span>
+          <div class="ht-bar-bg"><div class="ht-bar" style="width:87%"></div></div>
+        </li>
+        <li class="ht-country">
+          <span class="ht-rank">3</span>
+          <div class="ht-flag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 6'%3E%3Crect fill='%23fff' width='9' height='6'/%3E%3Crect fill='%2311436B' width='9' height='4'/%3E%3Crect fill='%23D7141A' width='9' height='2'/%3E%3C/svg%3E" alt="CZ"/></div>
+          <div class="ht-info">
+            <p class="ht-cname">Czech Republic</p>
+            <p class="ht-cdetail" data-i18n="c_czech_d">Excellent cost-to-income ratio</p>
+          </div>
+          <span class="ht-score">82</span>
+          <div class="ht-bar-bg"><div class="ht-bar" style="width:82%"></div></div>
+        </li>
       </ul>
+      
       <div class="ht-hint">
-        <span class="ht-hint-icon">&#9656;</span>
-        <span class="ht-hint-text" data-i18n-html="ht_hint">Add more about yourself to refine your ranking. The more Hek<em>ai</em> knows, the more precise your matches become.</span>
+        <span class="ht-hint-icon">💡</span>
+        <p class="ht-hint-text" data-i18n="ht_hint">Add more about yourself to refine your rankings.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===== CLOSING ===== -->
-<section class="closing">
-  <div class="closing-glow"></div>
-  <p class="closing-quote reveal" data-i18n-html="closing_quote">
-    Like an eclipse that transforms everything it touches,<br>
-    we believe that <em>every person we reach</em> carries forward<br>
-    a light that changes the world around them —<br>
-    one life, one phase, one <em>great crossing</em> at a time.
+<section class="section-dark bg-fade">
+  <p class="intro-text reveal" data-i18n-html="closing_quote">
+    Like the eclipse transforms everything it touches,<br>
+    we believe every person we reach brings light<br>
+    that changes the world around them.
   </p>
-  <div class="closing-line reveal"></div>
-  <p class="closing-motto reveal" data-i18n="hero_motto">For a better humanity</p>
 </section>
 
-<footer><p>&copy; Eclipsion O&Uuml; 2022 &mdash; <a href="https://eclipsion.org" target="_blank">eclipsion.org</a></p></footer>
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p>&copy; Eclipsion OÜ 2022–2026 — <a href="https://eclipsion.org" target="_blank">eclipsion.org</a></p>
+</footer>
 
-<script>
-// ===== TRANSLATIONS =====
-const T = {
-en: {
-  hero_motto: "For a better humanity",
-  discover: "Discover",
-  intro_text: 'Life is full of big changes — relocating to a new country, starting a business, navigating taxes in a new system, getting married, taking out a loan.<br><br><em>Eclipsion helps you understand what you\'re getting into.</em><br><br>We provide precise calculations, clear information, and honest analysis of trade-offs — so you can make the best decisions for your life. When you need a specialist, we connect you with the right one. And we stay with you long after everyone else is gone.',
-  what_headline: 'When life changes, you deserve <em>clarity</em> — not guesswork',
-  calc_title: "Precise Calculations", calc_desc: "Finances, cost of living, tax implications, loan comparisons — real numbers, not estimates. Data you can make decisions with.",
-  trade_title: "Clear Trade-Offs", trade_desc: "Every big decision has pros and cons. We lay them out honestly so you see the full picture before you commit.",
-  conn_title: "Right Connections", conn_desc: "When you need a lawyer, tax advisor, or specialist — we connect you with trusted professionals. No middlemen, no confusion.",
-  tag_reloc: "Relocating abroad", tag_tax: "Tax planning", tag_free: "Freelancer setup", tag_loan: "Loans & mortgages", tag_marry: "Getting married", tag_cost: "Cost of living analysis", tag_visa: "Visa & residency", tag_biz: "Starting a business",
-  what_bridge: 'We structured our approach around the most powerful transformation in nature — <em>the eclipse</em>. Three phases. From preparation to crossing to life-long support.',
-  framework_label: "Our Framework", phases_title: "The Three Phases",
-  phase1_num: "Phase I", phase1_name: "Before the Eclipse", phase1_sub: "Discovery & Preparation",
-  phase1_desc: 'We begin where most don\'t — <strong>before the journey starts</strong>. Listening. Understanding who you are, what you carry, where you need to go. Mapping pathways with precision, assessing risk, calculating what lies ahead.',
-  phase2_num: "Phase II", phase2_name: "The Eclipse", phase2_sub: "The Great Crossing",
-  phase2_desc: 'The transformation itself — <strong>when everything changes</strong>. We are present through every stage of the crossing, from the first step to the moment you arrive on the other side.',
-  phase3_num: "Phase III", phase3_name: "After the Eclipse", phase3_sub: "Life-Long Continuity",
-  phase3_desc: 'Where others stop, <strong>we continue</strong>. Integration, growth, community, and a relationship that evolves with you. After the last contact, there is no goodbye — only a new chapter.',
-  transition_text: 'Our first tool brings <em>Phase I</em> to life.<br><br>A companion that helps you see which countries match your life —<br>with precise data, honest trade-offs, and a ranking that evolves<br>as you share more about who you are and where you want to go.',
-  hekai_tagline: "Find where your life works best",
-  roots: "Roots", meaning: "Meaning", far_reaching: "The far-reaching moment", assistant: "Assistant",
-  hekai_action: 'Hek<em>ai</em> in action',
-  theme_light: "Light", theme_dark: "Dark",
-  ht_question: "How do you earn your income?", ht_employment: "Employment", ht_freelancing: "Freelancing",
-  ht_best_matches: "Best matches for you",
-  c_portugal: "Portugal", c_portugal_d: "Strong match across 8 pillars",
-  c_spain: "Spain", c_spain_d: "High on work-life balance",
-  c_czech: "Czech Republic", c_czech_d: "Excellent cost-to-income ratio",
-  c_germany: "Germany", c_germany_d: "Top healthcare & safety",
-  c_netherlands: "Netherlands", c_netherlands_d: "Strong community & jobs",
-  ht_hint: 'Add more about yourself to refine your ranking. The more Hek<em>ai</em> knows, the more precise your matches become.',
-  closing_quote: 'Like an eclipse that transforms everything it touches,<br>we believe that <em>every person we reach</em> carries forward<br>a light that changes the world around them —<br>one life, one phase, one <em>great crossing</em> at a time.'
-},
-sk: {
-  hero_motto: "Pre lepšie ľudstvo",
-  discover: "Objavte",
-  intro_text: 'Život je plný veľkých zmien — sťahovanie do novej krajiny, zakladanie firmy, orientácia v daňovom systéme, svadba, hypotéka.<br><br><em>Eclipsion vám pomôže pochopiť, do čoho idete.</em><br><br>Poskytujeme presné výpočty, jasné informácie a čestnú analýzu výhod a nevýhod — aby ste sa mohli rozhodnúť čo najlepšie. Keď potrebujete odborníka, spojíme vás s tým správnym. A zostávame s vami dlho po tom, čo všetci ostatní odídu.',
-  what_headline: 'Keď sa život mení, zaslúžite si <em>jasnosť</em> — nie dohady',
-  calc_title: "Presné výpočty", calc_desc: "Financie, životné náklady, daňové dopady, porovnanie úverov — reálne čísla, nie odhady. Dáta, podľa ktorých sa dá rozhodnúť.",
-  trade_title: "Jasné kompromisy", trade_desc: "Každé veľké rozhodnutie má klady aj zápory. Ukážeme ich čestne, aby ste videli celý obraz, než sa rozhodnete.",
-  conn_title: "Správne kontakty", conn_desc: "Keď potrebujete právnika, daňového poradcu alebo špecialistu — spojíme vás s overenými profesionálmi. Žiadni prostredníci, žiadny zmätok.",
-  tag_reloc: "Sťahovanie do zahraničia", tag_tax: "Daňové plánovanie", tag_free: "Nastavenie pre freelancerov", tag_loan: "Úvery a hypotéky", tag_marry: "Svadba", tag_cost: "Analýza životných nákladov", tag_visa: "Víza a pobyt", tag_biz: "Zakladanie firmy",
-  what_bridge: 'Náš prístup sme postavili okolo najsilnejšej premeny v prírode — <em>zatmenia</em>. Tri fázy. Od prípravy cez prechod až po celoživotnú podporu.',
-  framework_label: "Náš rámec", phases_title: "Tri fázy",
-  phase1_num: "Fáza I", phase1_name: "Pred zatmením", phase1_sub: "Prieskum a príprava",
-  phase1_desc: 'Začíname tam, kde väčšina nezačne — <strong>pred začiatkom cesty</strong>. Počúvame. Chápeme, kto ste, čo si nesiete, kam potrebujete ísť. Mapujeme cesty s presnosťou, hodnotíme riziká, počítame, čo vás čaká.',
-  phase2_num: "Fáza II", phase2_name: "Zatmenie", phase2_sub: "Veľký prechod",
-  phase2_desc: 'Samotná premena — <strong>keď sa všetko mení</strong>. Sme prítomní počas každej fázy prechodu, od prvého kroku až po chvíľu, keď prídete na druhú stranu.',
-  phase3_num: "Fáza III", phase3_name: "Po zatmení", phase3_sub: "Celoživotná kontinuita",
-  phase3_desc: 'Kde ostatní prestanú, <strong>my pokračujeme</strong>. Integrácia, rast, komunita a vzťah, ktorý sa vyvíja spolu s vami. Po poslednom kontakte sa nelúčime — začíname novú kapitolu.',
-  transition_text: 'Náš prvý nástroj dáva <em>Fáze I</em> život.<br><br>Spoločník, ktorý vám pomôže zistiť, ktoré krajiny zodpovedajú vášmu životu —<br>s presnými dátami, čestnými kompromismi a rebríčkom, ktorý sa vyvíja,<br>keď nám prezradíte viac o sebe a o tom, kam chcete ísť.',
-  hekai_tagline: "Nájdite, kde váš život funguje najlepšie",
-  roots: "Korene", meaning: "Význam", far_reaching: "Ďalekosiahly okamih", assistant: "Asistent",
-  hekai_action: 'Hek<em>ai</em> v akcii',
-  theme_light: "Svetlý", theme_dark: "Tmavý",
-  ht_question: "Ako zarábate?", ht_employment: "Zamestnanec", ht_freelancing: "Freelancer",
-  ht_best_matches: "Najlepšie zhody pre vás",
-  c_portugal: "Portugalsko", c_portugal_d: "Silná zhoda v 8 pilieroch",
-  c_spain: "Španielsko", c_spain_d: "Vysoká rovnováha práce a života",
-  c_czech: "Česká republika", c_czech_d: "Výborný pomer nákladov a príjmu",
-  c_germany: "Nemecko", c_germany_d: "Špičkové zdravotníctvo a bezpečnosť",
-  c_netherlands: "Holandsko", c_netherlands_d: "Silná komunita a pracovné príležitosti",
-  ht_hint: 'Pridajte o sebe viac a spresníte rebríček. Čím viac Hek<em>ai</em> vie, tým presnejšie sú vaše zhody.',
-  closing_quote: 'Tak ako zatmenie premení všetko, čoho sa dotkne,<br>veríme, že <em>každý človek, ku ktorému sa dostaneme</em>, nesie ďalej<br>svetlo, ktoré mení svet okolo —<br>jeden život, jedna fáza, jeden <em>veľký prechod</em>.'
-},
-cs: {
-  hero_motto: "Pro lepší lidstvo",
-  discover: "Objevte",
-  intro_text: 'Život je plný velkých změn — stěhování do nové země, zakládání firmy, orientace v daňovém systému, svatba, hypotéka.<br><br><em>Eclipsion vám pomůže pochopit, do čeho jdete.</em><br><br>Poskytujeme přesné výpočty, jasné informace a upřímnou analýzu výhod a nevýhod — abyste se mohli rozhodovat co nejlépe. Když potřebujete odborníka, spojíme vás s tím správným. A zůstáváme s vámi dlouho poté, co všichni ostatní odejdou.',
-  what_headline: 'Když se život mění, zasloužíte si <em>jasnost</em> — ne dohady',
-  calc_title: "Přesné výpočty", calc_desc: "Finance, životní náklady, daňové dopady, srovnání úvěrů — reálná čísla, ne odhady. Data, podle kterých se dá rozhodovat.",
-  trade_title: "Jasné kompromisy", trade_desc: "Každé velké rozhodnutí má klady i zápory. Ukážeme je upřímně, abyste viděli celý obraz, než se rozhodnete.",
-  conn_title: "Správné kontakty", conn_desc: "Když potřebujete právníka, daňového poradce nebo specialistu — spojíme vás s ověřenými profesionály. Žádní prostředníci, žádný zmatek.",
-  tag_reloc: "Stěhování do zahraničí", tag_tax: "Daňové plánování", tag_free: "Nastavení pro freelancery", tag_loan: "Úvěry a hypotéky", tag_marry: "Svatba", tag_cost: "Analýza životních nákladů", tag_visa: "Víza a pobyt", tag_biz: "Zakládání firmy",
-  what_bridge: 'Náš přístup jsme postavili kolem nejmocnější proměny v přírodě — <em>zatmění</em>. Tři fáze. Od přípravy přes přechod až po celoživotní podporu.',
-  framework_label: "Náš rámec", phases_title: "Tři fáze",
-  phase1_num: "Fáze I", phase1_name: "Před zatměním", phase1_sub: "Průzkum a příprava",
-  phase1_desc: 'Začínáme tam, kde většina nezačne — <strong>před začátkem cesty</strong>. Nasloucháme. Chápeme, kdo jste, co si nesete, kam potřebujete jít. Mapujeme cesty s přesností, hodnotíme rizika, počítáme, co vás čeká.',
-  phase2_num: "Fáze II", phase2_name: "Zatmění", phase2_sub: "Velký přechod",
-  phase2_desc: 'Samotná proměna — <strong>když se vše mění</strong>. Jsme přítomni během každé fáze přechodu, od prvního kroku až po okamžik, kdy dorazíte na druhou stranu.',
-  phase3_num: "Fáze III", phase3_name: "Po zatmění", phase3_sub: "Celoživotní kontinuita",
-  phase3_desc: 'Kde ostatní přestanou, <strong>my pokračujeme</strong>. Integrace, růst, komunita a vztah, který se vyvíjí spolu s vámi. Po posledním kontaktu se neloučíme — začínáme novou kapitolu.',
-  transition_text: 'Náš první nástroj dává <em>Fázi I</em> život.<br><br>Společník, který vám pomůže zjistit, které země odpovídají vašemu životu —<br>s přesnými daty, upřímnými kompromisy a žebříčkem, který se vyvíjí,<br>když nám prozradíte víc o sobě a o tom, kam chcete jít.',
-  hekai_tagline: "Najděte, kde váš život funguje nejlépe",
-  roots: "Kořeny", meaning: "Význam", far_reaching: "Dalekosáhlý okamžik", assistant: "Asistent",
-  hekai_action: 'Hek<em>ai</em> v akci',
-  theme_light: "Světlý", theme_dark: "Tmavý",
-  ht_question: "Jak vyděláváte?", ht_employment: "Zaměstnanec", ht_freelancing: "Freelancer",
-  ht_best_matches: "Nejlepší shody pro vás",
-  c_portugal: "Portugalsko", c_portugal_d: "Silná shoda v 8 pilířích",
-  c_spain: "Španělsko", c_spain_d: "Vysoká rovnováha práce a života",
-  c_czech: "Česká republika", c_czech_d: "Výborný poměr nákladů a příjmu",
-  c_germany: "Německo", c_germany_d: "Špičkové zdravotnictví a bezpečnost",
-  c_netherlands: "Nizozemsko", c_netherlands_d: "Silná komunita a pracovní příležitosti",
-  ht_hint: 'Přidejte o sobě víc a zpřesníte žebříček. Čím víc Hek<em>ai</em> ví, tím přesnější jsou vaše shody.',
-  closing_quote: 'Tak jako zatmění promění vše, čeho se dotkne,<br>věříme, že <em>každý člověk, ke kterému se dostaneme</em>, nese dál<br>světlo, které mění svět kolem —<br>jeden život, jedna fáze, jeden <em>velký přechod</em>.'
-},
-pl: {
-  hero_motto: "Dla lepszej ludzkości",
-  discover: "Odkryj",
-  intro_text: 'Życie jest pełne wielkich zmian — przeprowadzka do nowego kraju, zakładanie firmy, poruszanie się w nowym systemie podatkowym, ślub, kredyt.<br><br><em>Eclipsion pomaga zrozumieć, w co się wchodzi.</em><br><br>Dostarczamy precyzyjne obliczenia, jasne informacje i uczciwą analizę kompromisów — abyś mógł podejmować najlepsze decyzje. Kiedy potrzebujesz specjalisty, łączymy Cię z właściwym. I zostajemy z Tobą długo po tym, jak wszyscy inni odejdą.',
-  what_headline: 'Gdy życie się zmienia, zasługujesz na <em>jasność</em> — nie domysły',
-  calc_title: "Precyzyjne obliczenia", calc_desc: "Finanse, koszty życia, skutki podatkowe, porównania kredytów — realne liczby, nie szacunki. Dane, na których można opierać decyzje.",
-  trade_title: "Jasne kompromisy", trade_desc: "Każda wielka decyzja ma plusy i minusy. Przedstawiamy je uczciwie, abyś widział pełny obraz, zanim się zdecydujesz.",
-  conn_title: "Właściwe kontakty", conn_desc: "Kiedy potrzebujesz prawnika, doradcy podatkowego lub specjalisty — łączymy Cię z zaufanymi profesjonalistami. Bez pośredników, bez zamieszania.",
-  tag_reloc: "Przeprowadzka za granicę", tag_tax: "Planowanie podatkowe", tag_free: "Konfiguracja dla freelancerów", tag_loan: "Kredyty i hipoteki", tag_marry: "Ślub", tag_cost: "Analiza kosztów życia", tag_visa: "Wizy i pobyt", tag_biz: "Zakładanie firmy",
-  what_bridge: 'Naszą metodologię oparliśmy na najpotężniejszej przemianie w naturze — <em>zaćmieniu</em>. Trzy fazy. Od przygotowania przez przejście po wsparcie na całe życie.',
-  framework_label: "Nasz framework", phases_title: "Trzy fazy",
-  phase1_num: "Faza I", phase1_name: "Przed zaćmieniem", phase1_sub: "Odkrywanie i przygotowanie",
-  phase1_desc: 'Zaczynamy tam, gdzie większość nie zaczyna — <strong>przed rozpoczęciem podróży</strong>. Słuchamy. Rozumiemy, kim jesteś, co ze sobą niesiesz, dokąd musisz iść. Mapujemy ścieżki z precyzją, oceniamy ryzyko, obliczamy, co czeka.',
-  phase2_num: "Faza II", phase2_name: "Zaćmienie", phase2_sub: "Wielkie przejście",
-  phase2_desc: 'Sama przemiana — <strong>gdy wszystko się zmienia</strong>. Jesteśmy obecni na każdym etapie przejścia, od pierwszego kroku po moment, gdy dotrzesz na drugą stronę.',
-  phase3_num: "Faza III", phase3_name: "Po zaćmieniu", phase3_sub: "Ciągłość na całe życie",
-  phase3_desc: 'Gdzie inni się zatrzymują, <strong>my kontynuujemy</strong>. Integracja, rozwój, społeczność i relacja, która ewoluuje razem z Tobą. Po ostatnim kontakcie nie ma pożegnania — jest nowy rozdział.',
-  transition_text: 'Nasze pierwsze narzędzie ożywia <em>Fazę I</em>.<br><br>Towarzysz, który pomaga zobaczyć, które kraje pasują do Twojego życia —<br>z precyzyjnymi danymi, uczciwymi kompromisami i rankingiem, który się rozwija,<br>gdy dzielisz się tym, kim jesteś i dokąd chcesz zmierzać.',
-  hekai_tagline: "Znajdź, gdzie Twoje życie działa najlepiej",
-  roots: "Korzenie", meaning: "Znaczenie", far_reaching: "Dalekosięzny moment", assistant: "Asystent",
-  hekai_action: 'Hek<em>ai</em> w akcji',
-  theme_light: "Jasny", theme_dark: "Ciemny",
-  ht_question: "Jak zarabiasz?", ht_employment: "Etat", ht_freelancing: "Freelancing",
-  ht_best_matches: "Najlepsze dopasowania",
-  c_portugal: "Portugalia", c_portugal_d: "Silne dopasowanie w 8 filarach",
-  c_spain: "Hiszpania", c_spain_d: "Wysoka równowaga praca-życie",
-  c_czech: "Czechy", c_czech_d: "Doskonały stosunek kosztów do dochodów",
-  c_germany: "Niemcy", c_germany_d: "Najlepsza opieka zdrowotna i bezpieczeństwo",
-  c_netherlands: "Holandia", c_netherlands_d: "Silna społeczność i praca",
-  ht_hint: 'Dodaj więcej o sobie, aby doprecyzować ranking. Im więcej Hek<em>ai</em> wie, tym trafniejsze są dopasowania.',
-  closing_quote: 'Tak jak zaćmienie przemienia wszystko, czego dotknie,<br>wierzymy, że <em>każda osoba, do której dotrzemy</em>, niesie dalej<br>światło, które zmienia świat wokół —<br>jedno życie, jedna faza, jedno <em>wielkie przejście</em>.'
-},
-de: {
-  hero_motto: "Für eine bessere Menschheit",
-  discover: "Entdecken",
-  intro_text: 'Das Leben ist voller großer Veränderungen — Umzug in ein neues Land, Firmengründung, Navigation im Steuersystem, Heirat, Kreditaufnahme.<br><br><em>Eclipsion hilft Ihnen zu verstehen, worauf Sie sich einlassen.</em><br><br>Wir liefern präzise Berechnungen, klare Informationen und eine ehrliche Analyse von Kompromissen — damit Sie die besten Entscheidungen für Ihr Leben treffen können. Wenn Sie einen Spezialisten brauchen, verbinden wir Sie mit dem richtigen. Und wir bleiben bei Ihnen, lange nachdem alle anderen gegangen sind.',
-  what_headline: 'Wenn sich das Leben ändert, verdienen Sie <em>Klarheit</em> — keine Vermutungen',
-  calc_title: "Präzise Berechnungen", calc_desc: "Finanzen, Lebenshaltungskosten, steuerliche Auswirkungen, Kreditvergleiche — echte Zahlen, keine Schätzungen. Daten, mit denen Sie Entscheidungen treffen können.",
-  trade_title: "Klare Kompromisse", trade_desc: "Jede große Entscheidung hat Vor- und Nachteile. Wir legen sie ehrlich dar, damit Sie das vollständige Bild sehen, bevor Sie sich entscheiden.",
-  conn_title: "Die richtigen Kontakte", conn_desc: "Wenn Sie einen Anwalt, Steuerberater oder Spezialisten brauchen — wir verbinden Sie mit vertrauenswürdigen Fachleuten. Keine Mittelsmänner, keine Verwirrung.",
-  tag_reloc: "Umzug ins Ausland", tag_tax: "Steuerplanung", tag_free: "Freelancer-Setup", tag_loan: "Kredite & Hypotheken", tag_marry: "Heirat", tag_cost: "Lebenshaltungskosten-Analyse", tag_visa: "Visum & Aufenthalt", tag_biz: "Firmengründung",
-  what_bridge: 'Wir haben unseren Ansatz um die mächtigste Transformation der Natur strukturiert — <em>die Sonnenfinsternis</em>. Drei Phasen. Von der Vorbereitung über den Übergang bis zur lebenslangen Unterstützung.',
-  framework_label: "Unser Framework", phases_title: "Die drei Phasen",
-  phase1_num: "Phase I", phase1_name: "Vor der Finsternis", phase1_sub: "Erkundung & Vorbereitung",
-  phase1_desc: 'Wir beginnen dort, wo die meisten es nicht tun — <strong>bevor die Reise beginnt</strong>. Zuhören. Verstehen, wer Sie sind, was Sie mitbringen, wohin Sie müssen. Wege präzise kartieren, Risiken bewerten, berechnen, was vor Ihnen liegt.',
-  phase2_num: "Phase II", phase2_name: "Die Finsternis", phase2_sub: "Der große Übergang",
-  phase2_desc: 'Die Transformation selbst — <strong>wenn sich alles ändert</strong>. Wir sind in jeder Phase des Übergangs präsent, vom ersten Schritt bis zu dem Moment, in dem Sie auf der anderen Seite ankommen.',
-  phase3_num: "Phase III", phase3_name: "Nach der Finsternis", phase3_sub: "Lebenslange Kontinuität",
-  phase3_desc: 'Wo andere aufhören, <strong>machen wir weiter</strong>. Integration, Wachstum, Gemeinschaft und eine Beziehung, die sich mit Ihnen weiterentwickelt. Nach dem letzten Kontakt gibt es kein Abschied — nur ein neues Kapitel.',
-  transition_text: 'Unser erstes Werkzeug erweckt <em>Phase I</em> zum Leben.<br><br>Ein Begleiter, der Ihnen hilft zu sehen, welche Länder zu Ihrem Leben passen —<br>mit präzisen Daten, ehrlichen Kompromissen und einem Ranking, das sich entwickelt,<br>je mehr Sie über sich und Ihre Ziele verraten.',
-  hekai_tagline: "Finden Sie, wo Ihr Leben am besten funktioniert",
-  roots: "Wurzeln", meaning: "Bedeutung", far_reaching: "Der weitreichende Moment", assistant: "Assistent",
-  hekai_action: 'Hek<em>ai</em> in Aktion',
-  theme_light: "Hell", theme_dark: "Dunkel",
-  ht_question: "Wie verdienen Sie Ihr Einkommen?", ht_employment: "Angestellt", ht_freelancing: "Freelancing",
-  ht_best_matches: "Beste Treffer für Sie",
-  c_portugal: "Portugal", c_portugal_d: "Starke Übereinstimmung in 8 Säulen",
-  c_spain: "Spanien", c_spain_d: "Hohe Work-Life-Balance",
-  c_czech: "Tschechische Republik", c_czech_d: "Hervorragendes Kosten-Einkommens-Verhältnis",
-  c_germany: "Deutschland", c_germany_d: "Top Gesundheitswesen & Sicherheit",
-  c_netherlands: "Niederlande", c_netherlands_d: "Starke Gemeinschaft & Arbeitsmarkt",
-  ht_hint: 'Geben Sie mehr über sich an, um Ihr Ranking zu verfeinern. Je mehr Hek<em>ai</em> weiß, desto präziser werden Ihre Treffer.',
-  closing_quote: 'Wie eine Finsternis, die alles verwandelt, was sie berührt,<br>glauben wir, dass <em>jeder Mensch, den wir erreichen</em>, ein Licht weiterträgt,<br>das die Welt um ihn verändert —<br>ein Leben, eine Phase, ein <em>großer Übergang</em>.'
-},
-es: {
-  hero_motto: "Por una humanidad mejor",
-  discover: "Descubrir",
-  intro_text: 'La vida está llena de grandes cambios — mudarse a un nuevo país, emprender un negocio, navegar un nuevo sistema fiscal, casarse, pedir un préstamo.<br><br><em>Eclipsion te ayuda a entender en lo que te estás metiendo.</em><br><br>Proporcionamos cálculos precisos, información clara y un análisis honesto de ventajas y desventajas — para que puedas tomar las mejores decisiones para tu vida. Cuando necesitas un especialista, te conectamos con el adecuado. Y nos quedamos contigo mucho después de que todos se hayan ido.',
-  what_headline: 'Cuando la vida cambia, mereces <em>claridad</em> — no suposiciones',
-  calc_title: "Cálculos precisos", calc_desc: "Finanzas, coste de vida, implicaciones fiscales, comparación de préstamos — números reales, no estimaciones. Datos con los que tomar decisiones.",
-  trade_title: "Compromisos claros", trade_desc: "Toda gran decisión tiene pros y contras. Los exponemos con honestidad para que veas el panorama completo antes de decidir.",
-  conn_title: "Conexiones adecuadas", conn_desc: "Cuando necesitas un abogado, asesor fiscal o especialista — te conectamos con profesionales de confianza. Sin intermediarios, sin confusión.",
-  tag_reloc: "Mudanza al extranjero", tag_tax: "Planificación fiscal", tag_free: "Configuración freelance", tag_loan: "Préstamos e hipotecas", tag_marry: "Boda", tag_cost: "Análisis de coste de vida", tag_visa: "Visados y residencia", tag_biz: "Emprender un negocio",
-  what_bridge: 'Estructuramos nuestro enfoque en torno a la transformación más poderosa de la naturaleza — <em>el eclipse</em>. Tres fases. De la preparación al cruce y al apoyo de por vida.',
-  framework_label: "Nuestro marco", phases_title: "Las tres fases",
-  phase1_num: "Fase I", phase1_name: "Antes del eclipse", phase1_sub: "Descubrimiento y preparación",
-  phase1_desc: 'Comenzamos donde la mayoría no lo hace — <strong>antes de que empiece el viaje</strong>. Escuchando. Entendiendo quién eres, qué llevas contigo, adónde necesitas ir. Trazando caminos con precisión, evaluando riesgos, calculando lo que viene.',
-  phase2_num: "Fase II", phase2_name: "El eclipse", phase2_sub: "El gran cruce",
-  phase2_desc: 'La transformación misma — <strong>cuando todo cambia</strong>. Estamos presentes en cada etapa del cruce, desde el primer paso hasta el momento en que llegas al otro lado.',
-  phase3_num: "Fase III", phase3_name: "Después del eclipse", phase3_sub: "Continuidad de por vida",
-  phase3_desc: 'Donde otros se detienen, <strong>nosotros continuamos</strong>. Integración, crecimiento, comunidad y una relación que evoluciona contigo. Tras el último contacto, no hay despedida — solo un nuevo capítulo.',
-  transition_text: 'Nuestra primera herramienta da vida a la <em>Fase I</em>.<br><br>Un compañero que te ayuda a ver qué países encajan con tu vida —<br>con datos precisos, compromisos honestos y un ranking que evoluciona<br>a medida que compartes más sobre quién eres y adónde quieres ir.',
-  hekai_tagline: "Encuentra donde tu vida funciona mejor",
-  roots: "Raíces", meaning: "Significado", far_reaching: "El momento de largo alcance", assistant: "Asistente",
-  hekai_action: 'Hek<em>ai</em> en acción',
-  theme_light: "Claro", theme_dark: "Oscuro",
-  ht_question: "¿Cómo obtienes tus ingresos?", ht_employment: "Empleo", ht_freelancing: "Freelance",
-  ht_best_matches: "Mejores coincidencias para ti",
-  c_portugal: "Portugal", c_portugal_d: "Alta coincidencia en 8 pilares",
-  c_spain: "España", c_spain_d: "Alto equilibrio trabajo-vida",
-  c_czech: "República Checa", c_czech_d: "Excelente relación coste-ingreso",
-  c_germany: "Alemania", c_germany_d: "Sanidad y seguridad de primer nivel",
-  c_netherlands: "Países Bajos", c_netherlands_d: "Fuerte comunidad y empleo",
-  ht_hint: 'Añade más sobre ti para refinar tu ranking. Cuanto más sepa Hek<em>ai</em>, más precisas serán tus coincidencias.',
-  closing_quote: 'Como un eclipse que transforma todo lo que toca,<br>creemos que <em>cada persona que alcanzamos</em> lleva consigo<br>una luz que cambia el mundo a su alrededor —<br>una vida, una fase, un <em>gran cruce</em> a la vez.'
-},
-pt: {
-  hero_motto: "Por uma humanidade melhor",
-  discover: "Descobrir",
-  intro_text: 'A vida está cheia de grandes mudanças — mudar para um novo país, abrir um negócio, navegar um novo sistema fiscal, casar, contrair um empréstimo.<br><br><em>A Eclipsion ajuda-o a compreender no que se está a meter.</em><br><br>Fornecemos cálculos precisos, informações claras e uma análise honesta de compromissos — para que possa tomar as melhores decisões para a sua vida. Quando precisa de um especialista, conectamo-lo ao certo. E ficamos consigo muito depois de todos terem partido.',
-  what_headline: 'Quando a vida muda, você merece <em>clareza</em> — não suposições',
-  calc_title: "Cálculos precisos", calc_desc: "Finanças, custo de vida, implicações fiscais, comparação de empréstimos — números reais, não estimativas. Dados com os quais pode tomar decisões.",
-  trade_title: "Compromissos claros", trade_desc: "Toda grande decisão tem prós e contras. Apresentamo-los com honestidade para que veja o quadro completo antes de se comprometer.",
-  conn_title: "Conexões certas", conn_desc: "Quando precisa de um advogado, consultor fiscal ou especialista — conectamo-lo a profissionais de confiança. Sem intermediários, sem confusão.",
-  tag_reloc: "Mudança para o exterior", tag_tax: "Planeamento fiscal", tag_free: "Configuração freelancer", tag_loan: "Empréstimos e hipotecas", tag_marry: "Casamento", tag_cost: "Análise do custo de vida", tag_visa: "Vistos e residência", tag_biz: "Abrir um negócio",
-  what_bridge: 'Estruturámos a nossa abordagem em torno da transformação mais poderosa da natureza — <em>o eclipse</em>. Três fases. Da preparação à travessia ao apoio vitalício.',
-  framework_label: "A nossa metodologia", phases_title: "As três fases",
-  phase1_num: "Fase I", phase1_name: "Antes do eclipse", phase1_sub: "Descoberta e preparação",
-  phase1_desc: 'Começamos onde a maioria não começa — <strong>antes da viagem começar</strong>. A ouvir. A compreender quem é, o que carrega, para onde precisa ir. A mapear caminhos com precisão, a avaliar riscos, a calcular o que está pela frente.',
-  phase2_num: "Fase II", phase2_name: "O eclipse", phase2_sub: "A grande travessia",
-  phase2_desc: 'A transformação em si — <strong>quando tudo muda</strong>. Estamos presentes em cada etapa da travessia, desde o primeiro passo até ao momento em que chega ao outro lado.',
-  phase3_num: "Fase III", phase3_name: "Depois do eclipse", phase3_sub: "Continuidade vitalícia",
-  phase3_desc: 'Onde outros param, <strong>nós continuamos</strong>. Integração, crescimento, comunidade e uma relação que evolui consigo. Após o último contacto, não há despedida — apenas um novo capítulo.',
-  transition_text: 'A nossa primeira ferramenta dá vida à <em>Fase I</em>.<br><br>Um companheiro que o ajuda a ver quais países combinam com a sua vida —<br>com dados precisos, compromissos honestos e um ranking que evolui<br>à medida que partilha mais sobre quem é e para onde quer ir.',
-  hekai_tagline: "Encontre onde a sua vida funciona melhor",
-  roots: "Raízes", meaning: "Significado", far_reaching: "O momento de longo alcance", assistant: "Assistente",
-  hekai_action: 'Hek<em>ai</em> em ação',
-  theme_light: "Claro", theme_dark: "Escuro",
-  ht_question: "Como obtém os seus rendimentos?", ht_employment: "Emprego", ht_freelancing: "Freelancing",
-  ht_best_matches: "Melhores correspondências para si",
-  c_portugal: "Portugal", c_portugal_d: "Forte correspondência em 8 pilares",
-  c_spain: "Espanha", c_spain_d: "Alto equilíbrio trabalho-vida",
-  c_czech: "República Checa", c_czech_d: "Excelente rácio custo-rendimento",
-  c_germany: "Alemanha", c_germany_d: "Saúde e segurança de topo",
-  c_netherlands: "Países Baixos", c_netherlands_d: "Comunidade forte e emprego",
-  ht_hint: 'Adicione mais sobre si para refinar o seu ranking. Quanto mais o Hek<em>ai</em> souber, mais precisas serão as suas correspondências.',
-  closing_quote: 'Como um eclipse que transforma tudo o que toca,<br>acreditamos que <em>cada pessoa que alcançamos</em> carrega consigo<br>uma luz que muda o mundo ao seu redor —<br>uma vida, uma fase, uma <em>grande travessia</em> de cada vez.'
-},
-fr: {
-  hero_motto: "Pour une humanité meilleure",
-  discover: "Découvrir",
-  intro_text: 'La vie est pleine de grands changements — déménager dans un nouveau pays, créer une entreprise, naviguer dans un nouveau système fiscal, se marier, contracter un prêt.<br><br><em>Eclipsion vous aide à comprendre dans quoi vous vous engagez.</em><br><br>Nous fournissons des calculs précis, des informations claires et une analyse honnête des compromis — pour que vous puissiez prendre les meilleures décisions pour votre vie. Quand vous avez besoin d\'un spécialiste, nous vous connectons au bon. Et nous restons avec vous bien après que tous les autres soient partis.',
-  what_headline: 'Quand la vie change, vous méritez de la <em>clarté</em> — pas des suppositions',
-  calc_title: "Calculs précis", calc_desc: "Finances, coût de la vie, implications fiscales, comparaisons de prêts — des chiffres réels, pas des estimations. Des données sur lesquelles fonder vos décisions.",
-  trade_title: "Compromis clairs", trade_desc: "Toute grande décision a des avantages et des inconvénients. Nous les présentons honnêtement pour que vous voyiez le tableau complet avant de vous engager.",
-  conn_title: "Les bonnes connexions", conn_desc: "Quand vous avez besoin d'un avocat, d'un conseiller fiscal ou d'un spécialiste — nous vous connectons à des professionnels de confiance. Pas d'intermédiaires, pas de confusion.",
-  tag_reloc: "Déménagement à l'étranger", tag_tax: "Planification fiscale", tag_free: "Configuration freelance", tag_loan: "Prêts et hypothèques", tag_marry: "Mariage", tag_cost: "Analyse du coût de la vie", tag_visa: "Visa et résidence", tag_biz: "Création d'entreprise",
-  what_bridge: 'Nous avons structuré notre approche autour de la transformation la plus puissante de la nature — <em>l\'éclipse</em>. Trois phases. De la préparation à la traversée au soutien à vie.',
-  framework_label: "Notre cadre", phases_title: "Les trois phases",
-  phase1_num: "Phase I", phase1_name: "Avant l'éclipse", phase1_sub: "Découverte et préparation",
-  phase1_desc: 'Nous commençons là où la plupart ne commencent pas — <strong>avant que le voyage ne débute</strong>. Écouter. Comprendre qui vous êtes, ce que vous portez, où vous devez aller. Tracer des chemins avec précision, évaluer les risques, calculer ce qui vous attend.',
-  phase2_num: "Phase II", phase2_name: "L'éclipse", phase2_sub: "La grande traversée",
-  phase2_desc: 'La transformation elle-même — <strong>quand tout change</strong>. Nous sommes présents à chaque étape de la traversée, du premier pas au moment où vous arrivez de l\'autre côté.',
-  phase3_num: "Phase III", phase3_name: "Après l'éclipse", phase3_sub: "Continuité à vie",
-  phase3_desc: 'Là où d\'autres s\'arrêtent, <strong>nous continuons</strong>. Intégration, croissance, communauté et une relation qui évolue avec vous. Après le dernier contact, il n\'y a pas d\'adieu — seulement un nouveau chapitre.',
-  transition_text: 'Notre premier outil donne vie à la <em>Phase I</em>.<br><br>Un compagnon qui vous aide à voir quels pays correspondent à votre vie —<br>avec des données précises, des compromis honnêtes et un classement qui évolue<br>à mesure que vous partagez qui vous êtes et où vous voulez aller.',
-  hekai_tagline: "Trouvez où votre vie fonctionne le mieux",
-  roots: "Racines", meaning: "Signification", far_reaching: "Le moment décisif", assistant: "Assistant",
-  hekai_action: 'Hek<em>ai</em> en action',
-  theme_light: "Clair", theme_dark: "Sombre",
-  ht_question: "Comment gagnez-vous vos revenus ?", ht_employment: "Emploi", ht_freelancing: "Freelance",
-  ht_best_matches: "Meilleures correspondances pour vous",
-  c_portugal: "Portugal", c_portugal_d: "Forte correspondance sur 8 piliers",
-  c_spain: "Espagne", c_spain_d: "Bon équilibre travail-vie",
-  c_czech: "République tchèque", c_czech_d: "Excellent ratio coût-revenu",
-  c_germany: "Allemagne", c_germany_d: "Santé et sécurité de premier ordre",
-  c_netherlands: "Pays-Bas", c_netherlands_d: "Communauté forte et emploi",
-  ht_hint: 'Ajoutez plus d\'informations sur vous pour affiner votre classement. Plus Hek<em>ai</em> en sait, plus vos correspondances sont précises.',
-  closing_quote: 'Comme une éclipse qui transforme tout ce qu\'elle touche,<br>nous croyons que <em>chaque personne que nous atteignons</em> porte en elle<br>une lumière qui change le monde autour —<br>une vie, une phase, une <em>grande traversée</em> à la fois.'
-},
-uk: {
-  hero_motto: "Заради кращого людства",
-  discover: "Відкрити",
-  intro_text: 'Життя сповнене великих змін — переїзд до нової країни, відкриття бізнесу, орієнтація в податковій системі, одруження, кредит.<br><br><em>Eclipsion допомагає зрозуміти, у що ви вступаєте.</em><br><br>Ми надаємо точні розрахунки, чітку інформацію та чесний аналіз компромісів — щоб ви могли приймати найкращі рішення для свого життя. Коли вам потрібен спеціаліст, ми з\'єднаємо вас із правильним. І ми залишаємося з вами ще довго після того, як усі інші підуть.',
-  what_headline: 'Коли життя змінюється, ви заслуговуєте на <em>ясність</em> — не на здогадки',
-  calc_title: "Точні розрахунки", calc_desc: "Фінанси, вартість життя, податкові наслідки, порівняння кредитів — реальні цифри, не оцінки. Дані, на основі яких можна приймати рішення.",
-  trade_title: "Чіткі компроміси", trade_desc: "Кожне велике рішення має плюси та мінуси. Ми подаємо їх чесно, щоб ви бачили повну картину, перш ніж вирішити.",
-  conn_title: "Правильні контакти", conn_desc: "Коли вам потрібен юрист, податковий консультант або спеціаліст — ми з'єднуємо вас із перевіреними професіоналами. Без посередників, без плутанини.",
-  tag_reloc: "Переїзд за кордон", tag_tax: "Податкове планування", tag_free: "Налаштування для фрілансерів", tag_loan: "Кредити та іпотеки", tag_marry: "Одруження", tag_cost: "Аналіз вартості життя", tag_visa: "Візи та проживання", tag_biz: "Відкриття бізнесу",
-  what_bridge: 'Ми побудували наш підхід навколо наймогутнішої трансформації в природі — <em>затемнення</em>. Три фази. Від підготовки через перехід до підтримки на все життя.',
-  framework_label: "Наш фреймворк", phases_title: "Три фази",
-  phase1_num: "Фаза I", phase1_name: "Перед затемненням", phase1_sub: "Дослідження та підготовка",
-  phase1_desc: 'Ми починаємо там, де більшість не починає — <strong>до початку подорожі</strong>. Слухаємо. Розуміємо, хто ви, що несете із собою, куди вам потрібно. Прокладаємо шляхи з точністю, оцінюємо ризики, рахуємо, що попереду.',
-  phase2_num: "Фаза II", phase2_name: "Затемнення", phase2_sub: "Великий перехід",
-  phase2_desc: 'Сама трансформація — <strong>коли все змінюється</strong>. Ми присутні на кожному етапі переходу, від першого кроку до моменту, коли ви опинитесь на іншому боці.',
-  phase3_num: "Фаза III", phase3_name: "Після затемнення", phase3_sub: "Безперервність на все життя",
-  phase3_desc: 'Де інші зупиняються, <strong>ми продовжуємо</strong>. Інтеграція, зростання, спільнота та стосунки, що розвиваються разом із вами. Після останнього контакту немає прощання — є лише новий розділ.',
-  transition_text: 'Наш перший інструмент оживляє <em>Фазу I</em>.<br><br>Супутник, який допомагає побачити, які країни підходять вашому життю —<br>із точними даними, чесними компромісами та рейтингом, що розвивається,<br>коли ви ділитесь більше про себе та про те, куди хочете йти.',
-  hekai_tagline: "Знайдіть, де ваше життя працює найкраще",
-  roots: "Коріння", meaning: "Значення", far_reaching: "Далекосяжний момент", assistant: "Асистент",
-  hekai_action: 'Hek<em>ai</em> у дії',
-  theme_light: "Світла", theme_dark: "Темна",
-  ht_question: "Як ви заробляєте?", ht_employment: "Найм", ht_freelancing: "Фріланс",
-  ht_best_matches: "Найкращі збіги для вас",
-  c_portugal: "Португалія", c_portugal_d: "Сильний збіг у 8 стовпах",
-  c_spain: "Іспанія", c_spain_d: "Високий баланс роботи та життя",
-  c_czech: "Чеська Республіка", c_czech_d: "Відмінне співвідношення витрат і доходу",
-  c_germany: "Німеччина", c_germany_d: "Найкраща охорона здоров'я та безпека",
-  c_netherlands: "Нідерланди", c_netherlands_d: "Сильна спільнота та робота",
-  ht_hint: 'Додайте більше про себе, щоб уточнити рейтинг. Чим більше Hek<em>ai</em> знає, тим точнішими стають ваші збіги.',
-  closing_quote: 'Як затемнення, що перетворює все, до чого торкається,<br>ми віримо, що <em>кожна людина, до якої ми дотягуємося</em>, несе далі<br>світло, що змінює світ навколо —<br>одне життя, одна фаза, один <em>великий перехід</em>.'
-}
-};
+<!-- ===== LANGUAGE SELECT ===== -->
+<select id="langSelect" onchange="setLang(this.value)" style="position:fixed;top:20px;right:20px;z-index:1000;padding:8px 12px;background:#1a1a1a;color:#fff;border:1px solid #333;border-radius:4px;cursor:pointer">
+  <option value="en">English</option>
+  <option value="de">Deutsch</option>
+  <option value="cs">Čeština</option>
+  <option value="pl">Polski</option>
+  <option value="sk">Slovenčina</option>
+  <option value="uk">Українська</option>
+</select>
 
-// ===== LANGUAGE SWITCHING =====
-function setLang(lang) {
-  const strings = T[lang];
-  if (!strings) return;
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (strings[key] != null) el.textContent = strings[key];
-  });
-  document.querySelectorAll('[data-i18n-html]').forEach(el => {
-    const key = el.getAttribute('data-i18n-html');
-    if (strings[key] != null) el.innerHTML = strings[key];
-  });
-  document.documentElement.lang = lang;
-  try { localStorage.setItem('eclipsion-lang', lang); } catch(e) {}
-}
-
-// Restore saved language on load
-(function() {
-  try {
-    const saved = localStorage.getItem('eclipsion-lang');
-    if (saved && T[saved]) {
-      document.getElementById('langSelect').value = saved;
-      setLang(saved);
-    }
-  } catch(e) {}
-})();
-
-// Scroll reveal
-const obs = new IntersectionObserver(es => {
-  es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') });
-}, { threshold: .1, rootMargin: '0px 0px -30px 0px' });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-// Smooth scroll
-document.querySelector('.hero-scroll')?.addEventListener('click', e => {
-  e.preventDefault();
-  document.querySelector('#intro')?.scrollIntoView({ behavior: 'smooth' });
-});
-
-// Theme toggle
-function toggleTheme() {
-  const tool = document.getElementById('hekaiTool');
-  const sw = document.getElementById('themeSwitch');
-  const isDark = tool.dataset.theme === 'dark';
-  tool.dataset.theme = isDark ? 'light' : 'dark';
-  sw.classList.toggle('is-dark', !isDark);
-  document.getElementById('lbl-light').classList.toggle('active-label', isDark);
-  document.getElementById('lbl-dark').classList.toggle('active-label', !isDark);
-}
-
-// Employment/Freelancing toggle
-function setToggle(el) {
-  el.parentElement.querySelectorAll('.ht-toggle-opt').forEach(o => o.classList.remove('active'));
-  el.classList.add('active');
-}
-</script>
+<script src="js/translations.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
