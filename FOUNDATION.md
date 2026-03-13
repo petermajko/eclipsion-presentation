@@ -28,9 +28,9 @@
 
 ---
 
-## Hekai (ἥλιος = sun)
+## Hekairos (ἡκαι + καιρος = Hecate + Kairos)
 
-**Hekai** (ἥλιος - helios, "sun") is the first product/brand under Eclipsion.
+**Hekairos** is the first product/brand under Eclipsion.
 
 It's a tool that helps with life decisions — from the presentation, it appears to be a country/location recommendation tool that ranks countries based on personal criteria (similar to "best countries for [your needs]").
 
@@ -39,6 +39,26 @@ The tool shows:
 - Light/dark theme toggle
 - Multiple countries with details
 
+## Tekairos (τέχνη + καιρος = skill/craft + the right moment)
+
+Career transition tool — helps you find the right moment for your career moves.
+
+Current state: Job Optimizer / Job Seeker project in development.
+
+## Oikairos (οἶκος + καιρος = household + the right moment)
+
+Personal finance tool — helps with financial decisions at the right time.
+
+Planned features:
+- Monthly budget & expense tracker
+- Income/recurring items with frequency tracking
+- Categories: LOAN, UTIL, SUB, SAVE, RENT, FAM
+- Annualized cost calculation
+- Loan balance tracking
+- "Freed up money" projections from cancellations
+- Summary totals & forward projections
+- Cancelled items archive
+
 ---
 
 ## Structure
@@ -46,12 +66,13 @@ The tool shows:
 ```
 Eclipsion (umbrella company/organization)
     │
-    ├── Hekai (first product - life decision tool)
+    ├── Hekairos (life decision tool) - from Hecate + Kairos
     │       └── hekai.app (website)
     │
-    ├── Job Seeker / Job Optimizer (career transition tool)
+    ├── Tekairos (career transition tool) - from Tekne + Kairos
+    │       └── (Job Optimizer / Job Seeker)
     │
-    ├── Personal Finance (money management & transitions)
+    ├── Oikairos (personal finance tool) - from Oikos + Kairos
     │
     └── [More projects to come...]
 ```
